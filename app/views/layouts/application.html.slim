@@ -26,8 +26,6 @@ html
         - else
           =link_to 'Login', new_user_session_path, class: 'btn btn-outline-primary me-3'
           =link_to 'Sign-up', new_user_registration_path, class: 'btn btn-primary me-3'
-    p.notice
-      = notice
-    p.alert
-      = alert
+    - flash.each do |type, message|
+      = content_tag :p, message, class: "alert alert-#{type == 'notice' ? 'success' : 'danger'} text-center" 
     = yield
