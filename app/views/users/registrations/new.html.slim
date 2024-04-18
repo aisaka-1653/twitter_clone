@@ -1,6 +1,6 @@
 .container.form-signup
   h2.text-center.mb-4
-    | Create your account
+    = t('.sign_up')
   = form_with model: @user, url: user_registration_path do |f|
     = render "users/shared/error_messages", resource: resource
     .form-floating.mb-3
@@ -8,7 +8,7 @@
       = f.label :email, class: "form-label"
     - if @minimum_password_length
       em
-        = "(#{@minimum_password_length} characters minimum)"
+        = t('.minimum_password_length', count: @minimum_password_length)
     .form-floating.mb-3
       = f.password_field :password, class: "form-control", placeholder: "Password"
       = f.label :password, class: "form-label"
@@ -31,5 +31,5 @@
     .form-floating.mb-3
       = f.telephone_field :mobile_number, class: "form-control", placeholder: "mobile-number"
       = f.label :mobile_number, class: "form-label"
-    = f.submit "Sign up", class: "btn btn-outline-primary w-100 py-2 mb-3"
+    = f.submit t('.sign_up'), class: "btn btn-outline-primary w-100 py-2 mb-3"
   = render "users/shared/links"

@@ -1,0 +1,6 @@
+ja:
+  layouts:
+    application:
+      log_in: ログイン
+      log_out: ログアウト
+      sign_up: アカウント登録

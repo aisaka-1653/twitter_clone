@@ -22,10 +22,10 @@ html
             | Twitterクローン
       .col-md-3.text-end
         - if user_signed_in?
-          =link_to 'Logout', destroy_user_session_path, data: {turbo_method: :delete}, class: 'btn btn-outline-primary me-3'
+          =link_to t('.log_out'), destroy_user_session_path, data: {turbo_method: :delete}, class: 'btn btn-outline-primary me-3'
         - else
-          =link_to 'Login', new_user_session_path, class: 'btn btn-outline-primary me-3'
-          =link_to 'Sign-up', new_user_registration_path, class: 'btn btn-primary me-3'
+          =link_to t('.log_in'), new_user_session_path, class: 'btn btn-outline-primary me-3'
+          =link_to t('.sign_up'), new_user_registration_path, class: 'btn btn-primary me-3'
     - flash.each do |type, message|
       = content_tag :p, message, class: "alert alert-#{type == 'notice' ? 'success' : 'danger'} text-center" 
     = yield
