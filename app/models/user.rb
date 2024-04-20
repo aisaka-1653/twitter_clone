@@ -9,4 +9,5 @@ class User < ApplicationRecord
          :lockable, :omniauthable, omniauth_providers: %i[github]
 
   validates :email, :display_name, :username, :date_of_birth, :mobile_number, presence: true
+  validates :uid, uniqueness: { scope: :provider }
 end
