@@ -21,6 +21,7 @@ class User < ApplicationRecord
       # メアドによるアカウント登録では入力必須のためダミーデータを入れる
       user.date_of_birth = '1900-01-01'
       user.mobile_number = '00011112222'
+      user.skip_confirmation!
     end
   end
 
