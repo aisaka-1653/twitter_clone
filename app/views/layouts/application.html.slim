@@ -27,5 +27,5 @@ html
           =link_to t('.log_in'), new_user_session_path, class: 'btn btn-outline-primary mx-3'
           =link_to t('.sign_up'), new_user_registration_path, class: 'btn btn-primary'
     - flash.each do |type, message|
-      = content_tag :p, message, class: "alert alert-#{type == 'notice' ? 'success' : 'danger'} text-center" 
+      = content_tag :p, message, class: "alert alert-#{type == 'notice' ? 'success' : 'danger'} text-center"
     = yield
