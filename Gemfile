@@ -56,6 +56,8 @@ gem 'bootsnap', require: false
 gem 'devise'
 gem 'gmail'
 gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-rails_csrf_protection'
 gem 'slim'
 
 group :development, :test do
