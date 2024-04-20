@@ -109,6 +109,10 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
+    dotenv (3.1.0)
+    dotenv-rails (3.1.0)
+      dotenv (= 3.1.0)
+      railties (>= 6.1)
     erubi (1.12.0)
     erubis (2.7.0)
     factory_bot (6.2.1)
@@ -381,6 +385,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise
+  dotenv-rails
   factory_bot_rails
   gmail
   htmlbeautifier
