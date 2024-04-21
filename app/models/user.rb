@@ -37,6 +37,8 @@ class User < ApplicationRecord
     user.avatar.attach(io: file, filename:)
   end
 
+  private_class_method :attach_avatar_from_url
+
   private
 
   def set_uid
