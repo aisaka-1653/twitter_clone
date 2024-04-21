@@ -1,8 +1,9 @@
 # frozen_string_literal: true
-
+require 'open-uri'
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  has_one_attached :avatar
+  has_one_attached :header
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable, :trackable, :timeoutable,
@@ -16,8 +17,8 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
       user.display_name = auth.info.name
-      # user.image = auth.info.image
       user.username = auth.info.nickname
+      attach_avatar_from_url(user, auth.info.image)
       # メアドによるアカウント登録では入力必須のためダミーデータを入れる
       user.date_of_birth = '1900-01-01'
       user.mobile_number = '00011112222'
@@ -27,5 +28,13 @@ class User < ApplicationRecord
 
   def self.create_unique_string
     SecureRandom.uuid
+  end
+
+  private
+
+  # 拡張子はContent-Typeヘッダーから取得するらしいが今回は実装しない
+  def self.attach_avatar_from_url(user, url)
+    filename = "user_#{user.uid}_avatar"
+    user.avatar.attach(io: URI.open(url), filename: filename)
   end
 end
