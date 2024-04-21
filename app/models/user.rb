@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 require 'open-uri'
 class User < ApplicationRecord
+  after_create :set_default_avatar
+  
   has_one_attached :avatar
   has_one_attached :header
 
@@ -36,5 +38,11 @@ class User < ApplicationRecord
   def self.attach_avatar_from_url(user, url)
     filename = "user_#{user.uid}_avatar"
     user.avatar.attach(io: URI.open(url), filename: filename)
+  end
+
+  def set_default_avatar
+    unless provider == 'github'
+      self.avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'users', 'default_avatar.png')), filename: 'default_avatar.png', content_type: 'image/png')
+    end
   end
 end
