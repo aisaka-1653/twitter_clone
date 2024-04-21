@@ -1,8 +1,10 @@
 # frozen_string_literal: true
+
 require 'open-uri'
 class User < ApplicationRecord
+  before_create :set_uid
   after_create :set_default_avatar
-  
+
   has_one_attached :avatar
   has_one_attached :header
 
@@ -28,21 +30,29 @@ class User < ApplicationRecord
     end
   end
 
-  def self.create_unique_string
-    SecureRandom.uuid
+  # 拡張子はContent-Typeヘッダーから取得するらしいが今回は実装しない
+  def self.attach_avatar_from_url(user, url)
+    file = URI.parse(url).open
+    filename = "user_#{user.uid}_avatar"
+    user.avatar.attach(io: file, filename:)
   end
 
   private
 
-  # 拡張子はContent-Typeヘッダーから取得するらしいが今回は実装しない
-  def self.attach_avatar_from_url(user, url)
-    filename = "user_#{user.uid}_avatar"
-    user.avatar.attach(io: URI.open(url), filename: filename)
+  def set_uid
+    return if provider == 'github'
+
+    self.uid = create_unique_string
+  end
+
+  def create_unique_string
+    SecureRandom.uuid
   end
 
   def set_default_avatar
-    unless provider == 'github'
-      self.avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'users', 'default_avatar.png')), filename: 'default_avatar.png', content_type: 'image/png')
-    end
+    return if provider == 'github'
+
+    avatar.attach(io: File.open(Rails.root.join('app/assets/images/users/default_avatar.png')),
+                  filename: 'default_avatar.png', content_type: 'image/png')
   end
 end
