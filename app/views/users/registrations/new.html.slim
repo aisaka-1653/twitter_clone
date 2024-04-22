@@ -1,0 +1,35 @@
+.container.form-signup
+  h2.text-center.mb-4
+    = t('.sign_up')
+  = form_with model: @user, url: user_registration_path do |f|
+    = render "users/shared/error_messages", resource: resource
+    .form-floating.mb-3
+      = f.email_field :email, class: "form-control", placeholder: "name@example.com"
+      = f.label :email, class: "form-label"
+    - if @minimum_password_length
+      em
+        = t('.minimum_password_length', count: @minimum_password_length)
+    .form-floating.mb-3
+      = f.password_field :password, class: "form-control", placeholder: "Password"
+      = f.label :password, class: "form-label"
+    .form-floating
+      = f.password_field :password_confirmation, class: "form-control", placeholder: "Password"
+      = f.label :password_confirmation, class: "form-label"
+    hr.my-4
+    .form-floating.mb-3
+      = f.text_field :display_name, class: "form-control", placeholder: "display-name"
+      = f.label :display_name, class: "form-label"
+    .input-group.mb-3
+      span.input-group-text
+        | @
+      .form-floating
+        = f.text_field :username, class: "form-control", placeholder: "username"
+        = f.label :username, class: "form-label"
+    .form-floating.mb-3
+      = f.date_field :date_of_birth, class: "form-control", placeholder: "date-of-birth"
+      = f.label :date_of_birth, class: "form-label"
+    .form-floating.mb-3
+      = f.telephone_field :mobile_number, class: "form-control", placeholder: "mobile-number"
+      = f.label :mobile_number, class: "form-label"
+    = f.submit t('.sign_up'), class: "btn btn-outline-primary w-100 py-2 mb-3"
+  = render "users/shared/links"
