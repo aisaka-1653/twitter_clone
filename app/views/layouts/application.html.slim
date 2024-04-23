@@ -22,7 +22,7 @@ html
             | Twitterクローン
       .col-md-5.text-end
         - if user_signed_in?
-          =link_to t('.log_out'), destroy_user_session_path, data: {turbo_method: :delete}, class: 'btn btn-outline-primary me-3'
+          =link_to t('.log_out'), destroy_user_session_path, data: {turbo_method: :delete}, class: 'btn btn-outline-primary mx-3'
         - else
           =link_to t('.log_in'), new_user_session_path, class: 'btn btn-outline-primary mx-3'
           =link_to t('.sign_up'), new_user_registration_path, class: 'btn btn-primary'
