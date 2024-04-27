@@ -6,6 +6,8 @@ class User < ApplicationRecord
   after_create :set_default_avatar
 
   has_many :tweets, dependent: :destroy
+  has_many :followers, class_name: 'Follow', foreign_key: 'follower_id', dependent: :destroy
+  has_many :followees, class_name: 'Follow', foreign_key: 'followee_id', dependent: :destroy
 
   has_one_attached :avatar
   has_one_attached :header
