@@ -5,6 +5,8 @@ class User < ApplicationRecord
   before_create :set_uid
   after_create :set_default_avatar
 
+  has_many :tweets, dependent: :destroy
+
   has_one_attached :avatar
   has_one_attached :header
 
