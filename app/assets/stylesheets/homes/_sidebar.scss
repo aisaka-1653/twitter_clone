@@ -1,6 +1,9 @@
 .sidebar {
   width: 260px;
+  height: calc(100% - 71px);
   box-sizing: content-box;
+  position: fixed;
+  top: 71px;
 }
 
 .nav-item {
