@@ -30,6 +30,10 @@ main {
   border-radius: 0px;
 }
 
+.form-control-plaintext {
+  min-height: 62px;
+}
+
 .reaction-icon {
   transition: background-color 0.3s ease;
 }
