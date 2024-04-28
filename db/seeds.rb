@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 ApplicationRecord.transaction do
-  (1..5).each do |n| 
+  (1..5).each do |n|
     user = User.create!(
       email: "user#{n}@example.com",
-      password: "123456",
-      password_confirmation: "123456",
+      password: '123456',
+      password_confirmation: '123456',
       display_name: "display_name#{n}",
       username: "username#{n}",
-      date_of_birth: "1997-11-27",
-      mobile_number: "00011112222",
+      date_of_birth: '1997-11-27',
+      mobile_number: '00011112222'
     )
     (1..10).each do |i|
       user.tweets.create!(
