@@ -11,9 +11,11 @@ ApplicationRecord.transaction do
       date_of_birth: "1997-11-27",
       mobile_number: "00011112222",
     )
-    user.tweets.create!(
-      content: "Twitterを始めました｡#{user.display_name}です｡"
-    )
+    (1..10).each do |i|
+      user.tweets.create!(
+        content: "Twitterを始めました｡#{user.display_name}です｡#{i}回目のツイートです｡"
+      )
+    end
   end
 end
 
