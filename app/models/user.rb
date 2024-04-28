@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :tweets, dependent: :destroy
   has_many :followers, class_name: 'Follow', foreign_key: 'follower_id', dependent: :destroy
   has_many :followees, class_name: 'Follow', foreign_key: 'followee_id', dependent: :destroy
+  has_many :following_users, through: :followers, source: :followee
+  has_many :follower_users, through: :followees, source: :follower
 
   has_one_attached :avatar
   has_one_attached :header
