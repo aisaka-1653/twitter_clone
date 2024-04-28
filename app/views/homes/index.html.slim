@@ -67,7 +67,7 @@
                 path[d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"]
               span.fs-5
                 = t('.more')
-        = link_to "ツイートする", root_path, class: "btn tweet-btn rounded-pill"
+        = link_to t('.tweet'), root_path, class: "btn tweet-btn rounded-pill"
       .my-2
         = link_to root_path, class: "text-decoration-none text-dark" do
           .nav-item.py-2.px-4.rounded-pill.d-flex.align-items-center.gap-3 
@@ -79,12 +79,28 @@
                 = "@#{current_user.username}"
             svg.bi.bi-three-dots.ms-auto[xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4B4F53" viewbox="0 0 16 16"]
               path[d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"]
-    div.col-9
-      .card
+    main.border.border-top-0
+      ul.nav.nav-fill.align-items-center.border-bottom.text-center
+        li.nav-item.tab
+          a.nav-link.active.text-dark.py-0[data-bs-toggle="tab" data-bs-target="#detail" type="button"]
+            = t('.for_you')
+        li.nav-item.tab
+          a.nav-link.text-dark.py-0[data-bs-toggle="tab" data-bs-target="#test" type="button"]
+            = t('.following')
+      .card.border-0.border-bottom
         .card-body.d-flex.flex-row.align-items-center.py-1.gap-3
-          p.m-0
-            = image_tag current_user.avatar, size: "40x40", class: "rounded-circle"
-          textarea.form-control-plaintext.w-100
-        .card-footer.d-flex.flex-row.justify-content-end
-          a href="#" class="btn btn-primary rounded-pill"
-            | ツイートする
+          = image_tag current_user.avatar, size: "40x40", class: "rounded-circle m-0"
+          textarea.form-control-plaintext.w-100[placeholder="いまどうしてる？"]
+        .card-footer.d-flex.justify-content-between.align-items-center.bg-white.border-0.py-0
+          = link_to root_path do
+            .nav-item.py-2.px-2.rounded-circle 
+              svg.bi.bi-image[xmlns="http://www.w3.org/2000/svg" width="24" height="16" fill="#1DA1F2" viewbox="0 0 16 16"]
+                path[d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"]
+                path[d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"]
+          = link_to t('.tweet'), root_path, class: "btn tweet-btn rounded-pill"
+      .tab-content
+        .tab-pane.active#detail
+          = render partial: 'tweet', collection: @all_tweets
+
+        .tab-pane#test
+          = render partial: 'tweet', collection: @following_tweets

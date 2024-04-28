@@ -1,6 +1,5 @@
 .sidebar {
   width: 260px;
-  height: 100%;
   box-sizing: content-box;
 }
 
@@ -12,19 +11,12 @@
   background-color:	#E7E7E8;
 }
 
-.tweet-btn {
-  width: 90%;
-  background-color: #1DA1F2;
-  color: white;
-  font-weight: 700;
-  padding-block: 12px;
-  margin-block: 16px;
-  transition: background-color 0.3s ease;
-}
-
-.tweet-btn:hover {
-  background-color:	#1A8CD8;
-  color: white;
+.sidebar {
+  .tweet-btn {
+    width: 90%;
+    padding-block: 12px;
+    margin-block: 16px;
+  }
 }
 
 .display-name {

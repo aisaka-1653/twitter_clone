@@ -1,0 +1,30 @@
+main {
+  width: 600px;
+}
+
+main {
+  .tweet-btn {
+    font-size: 15px;
+    padding-block: 4px;
+    margin-block: 8px;
+  }
+}
+
+.nav {
+  height: 53px;
+}
+
+.nav-link.active{
+  font-weight: bold;
+  text-decoration: underline solid #1DA1F2 4px;
+  text-underline-offset: 17px;
+}
+
+.tab {
+  height: 100%;
+  line-height: 53px;
+}
+
+.card {
+  border-radius: 0px;
+}
