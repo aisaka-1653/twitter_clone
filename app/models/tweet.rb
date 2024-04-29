@@ -2,6 +2,7 @@
 
 class Tweet < ApplicationRecord
   belongs_to :user
+  has_many :likes
 
   scope :with_user_and_avatar, -> { includes(user: :avatar_attachment) }
   scope :sorted, -> { order(created_at: :desc) }
