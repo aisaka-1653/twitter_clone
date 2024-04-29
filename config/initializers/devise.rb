@@ -310,4 +310,11 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+  config.to_prepare do
+    Devise::ConfirmationsController.layout 'devise'
+    Devise::PasswordsController.layout 'devise'
+    Devise::RegistrationsController.layout 'devise'
+    Devise::SessionsController.layout 'devise'
+    Devise::UnlocksController.layout 'devise'
+  end
 end
