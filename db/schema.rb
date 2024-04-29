@@ -52,9 +52,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_29_105319) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.bigint "tweet_id", null: false
+    t.bigint "tweet_id"
     t.bigint "user_id", null: false
     t.string "content", null: false
+    t.string "username", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tweet_id"], name: "index_comments_on_tweet_id"
