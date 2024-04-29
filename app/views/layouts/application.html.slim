@@ -28,4 +28,9 @@ html
           =link_to t('.sign_up'), new_user_registration_path, class: 'btn btn-primary'
     - flash.each do |type, message|
       = content_tag :p, message, class: "alert alert-#{type == 'notice' ? 'success' : 'danger'} text-center"
-    = yield
+    .container
+      .d-flex
+        - if user_signed_in?
+          = render partial: 'layouts/sidebar'
+        main
+          = yield

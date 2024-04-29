@@ -6,20 +6,20 @@
   top: 71px;
 }
 
-.nav-item {
-  transition: background-color 0.3s ease;
-}
-
-.nav-item:hover {
-  background-color:	#E7E7E8;
-}
-
 .sidebar {
   .tweet-btn {
     width: 90%;
     padding-block: 12px;
     margin-block: 16px;
   }
+}
+
+.nav-item {
+  transition: background-color 0.3s ease;
+}
+
+.nav-item:hover {
+  background-color:	#E7E7E8;
 }
 
 .display-name {
