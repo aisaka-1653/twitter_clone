@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :likes
   has_many :retweets
   has_many :bookmarks
+  has_many :comments
 
   has_one_attached :avatar
   has_one_attached :header

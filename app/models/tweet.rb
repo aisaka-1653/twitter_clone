@@ -5,6 +5,7 @@ class Tweet < ApplicationRecord
   has_many :likes
   has_many :retweets
   has_many :bookmarks
+  has_many :comments
 
   scope :with_user_and_avatar, -> { includes(user: :avatar_attachment) }
   scope :sorted, -> { order(created_at: :desc) }
