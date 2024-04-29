@@ -1,17 +1,6 @@
 ja:
   homes:
     index:
-      home: ホーム
-      explore: 話題を検索
-      notifications: 通知
-      messages: メッセージ
-      lists: リスト
-      bookmarks: ブックマーク
-      communities: コミュニティ
-      premium: プレミアム
-      profile: プロフィール
-      more: もっと見る
       for_you: おすすめ
       following: フォロー中
       tweet: ツイートする
-
