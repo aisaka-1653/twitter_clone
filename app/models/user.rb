@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :follower_users, through: :followees, source: :follower
 
   has_many :likes
+  has_many :retweets
 
   has_one_attached :avatar
   has_one_attached :header
