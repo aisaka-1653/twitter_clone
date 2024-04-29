@@ -3,7 +3,7 @@
 require 'open-uri'
 class User < ApplicationRecord
   before_create :set_uid
-  after_create :set_default_avatar
+  after_create :set_default_avatar, :set_default_header
 
   has_many :tweets, dependent: :destroy
   has_many :followers, class_name: 'Follow', foreign_key: 'follower_id', dependent: :destroy, inverse_of: :followee
@@ -63,4 +63,10 @@ class User < ApplicationRecord
     avatar.attach(io: File.open(Rails.root.join('app/assets/images/users/default_avatar.png')),
                   filename: 'default_avatar.png', content_type: 'image/png')
   end
+
+  def set_default_header
+    header.attach(io: File.open(Rails.root.join('app/assets/images/users/default_header.png')),
+                  filename: 'default_header.png', content_type: 'image/png')
+  end
+
 end
