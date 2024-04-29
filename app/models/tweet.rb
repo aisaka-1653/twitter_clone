@@ -2,10 +2,11 @@
 
 class Tweet < ApplicationRecord
   belongs_to :user
-  has_many :likes
-  has_many :retweets
-  has_many :bookmarks
-  has_many :comments
+  has_many :likes, dependent: :destroy
+  has_many :retweets, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
+  # ツイートが削除されてもプロフィール画面では表示する
+  has_many :comments, dependent: :nullify
 
   scope :with_user_and_avatar, -> { includes(user: :avatar_attachment) }
   scope :sorted, -> { order(created_at: :desc) }

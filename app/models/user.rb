@@ -11,10 +11,10 @@ class User < ApplicationRecord
   has_many :following_users, through: :followers, source: :followee
   has_many :follower_users, through: :followees, source: :follower
 
-  has_many :likes
-  has_many :retweets
-  has_many :bookmarks
-  has_many :comments
+  has_many :likes, dependent: :destroy
+  has_many :retweets, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   has_one_attached :avatar
   has_one_attached :header
