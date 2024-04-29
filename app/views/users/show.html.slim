@@ -63,18 +63,18 @@
         = t('.following')
   .tab-content
     .tab-pane.active#tweets
-      = render partial: 'shared/tweet', collection: @user.tweets
-      / .d-flex.flex-column.align-items-center.py-2
-        = paginate @user.tweets, param_name: :all_page
+      = render partial: 'shared/tweet', collection: @tweets
+      .d-flex.flex-column.align-items-center.py-2
+        = paginate @tweets, param_name: :tweets_page
     .tab-pane#likes
-      = render partial: 'shared/tweet', collection: @user.tweets
-      / .d-flex.flex-column.align-items-center.py-2
-        = paginate @following_tweets, param_name: :following_page
+      = render partial: 'shared/tweet', collection: @likes
+      .d-flex.flex-column.align-items-center.py-2
+        = paginate @likes, param_name: :likes_page
     .tab-pane#retweets
-      = render partial: 'shared/tweet', collection: @user.tweets
-      / .d-flex.flex-column.align-items-center.py-2
-        = paginate @following_tweets, param_name: :following_page
+      = render partial: 'shared/tweet', collection: @retweets
+      .d-flex.flex-column.align-items-center.py-2
+        = paginate @retweets, param_name: :retweets_page
     .tab-pane#comments
-      = render partial: 'shared/tweet', collection: @user.tweets
-      / .d-flex.flex-column.align-items-center.py-2
-        = paginate @following_tweets, param_name: :following_page
+      = render partial: 'shared/tweet', collection: @comments
+      .d-flex.flex-column.align-items-center.py-2
+        = paginate @comments, param_name: :comments_page
