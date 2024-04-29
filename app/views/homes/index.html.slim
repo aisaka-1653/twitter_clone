@@ -20,10 +20,10 @@
       = link_to t('.tweet'), root_path, class: "btn tweet-btn rounded-pill"
   .tab-content
     .tab-pane.active#recommendation
-      = render partial: 'tweet', collection: @all_tweets
+      = render partial: 'shared/tweet', collection: @all_tweets
       .d-flex.flex-column.align-items-center.py-2
         = paginate @all_tweets, param_name: :all_page
     .tab-pane#following
-      = render partial: 'tweet', collection: @following_tweets
+      = render partial: 'shared/tweet', collection: @following_tweets
       .d-flex.flex-column.align-items-center.py-2
         = paginate @following_tweets, param_name: :following_page

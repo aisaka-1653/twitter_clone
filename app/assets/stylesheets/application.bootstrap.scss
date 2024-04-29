@@ -4,8 +4,10 @@
 @import './shared/sidebar';
 @import './shared/timeline';
 @import './shared/tweet_btn';
+@import './shared/link';
 @import './homes/tweet_form';
 @import './kaminari/pagination';
+@import './users/profile';
 
 html, body {
   min-height: 100dvh;
