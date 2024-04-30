@@ -56,6 +56,7 @@ gem 'bootsnap', require: false
 gem 'aws-sdk-s3', require: false
 gem 'devise'
 gem 'gmail'
+gem 'kaminari'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection'

@@ -1,0 +1,15 @@
+.page-link {
+  border: none;
+  color: black;
+}
+
+.page-item.active>.page-link {
+  background-color: inherit;
+  color: black;
+  text-decoration: underline solid #1DA1F2 4px;
+  text-underline-offset: 10px;
+}
+
+.pagination {
+  margin: 0;
+}

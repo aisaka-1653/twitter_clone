@@ -1,3 +1,16 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
-@import './users/form'
+@import './users/form';
+@import './homes/sidebar';
+@import './homes/main';
+@import './homes/tweet_btn';
+@import './kaminari/pagination';
+
+html, body {
+  min-height: 100dvh;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
