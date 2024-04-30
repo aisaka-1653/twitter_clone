@@ -8,14 +8,14 @@
       .display-name
         = @user.display_name
       .text-secondary.small
-        = "#{@user.tweets.count}件のツイート"
+        = t('.tweets_count', count: @user.tweets.count )
   = image_tag @user.header, class: "w-100"
   .negative-margin.d-flex.flex-row.justify-content-between.px-3
     .d-flex.avatar
       .bg-white.rounded-circle.p-1
         = image_tag @user.avatar, size: "133x133", class: "rounded-circle"
     span.mt-2
-      = link_to "プロフィールを編集", root_path, class: "link btn profile-edit-btn rounded-pill"
+      = link_to t('.edit_profile'), root_path, class: "link btn profile-edit-btn rounded-pill"
   .p-3
     .display-name
       = @user.display_name
@@ -51,16 +51,16 @@
   ul.nav.nav-fill.align-items-center.border-bottom.text-center
     li.nav-item.tab
       a.nav-link.active.text-dark.py-0[data-bs-toggle="tab" data-bs-target="#tweets" type="button"]
-        = t('.for_you')
+        = t('.tweets')
     li.nav-item.tab
       a.nav-link.text-dark.py-0[data-bs-toggle="tab" data-bs-target="#likes" type="button"]
-        = t('.following')
+        = t('.likes')
     li.nav-item.tab
       a.nav-link.text-dark.py-0[data-bs-toggle="tab" data-bs-target="#retweets" type="button"]
-        = t('.following')
+        = t('.retweets')
     li.nav-item.tab
       a.nav-link.text-dark.py-0[data-bs-toggle="tab" data-bs-target="#comments" type="button"]
-        = t('.following')
+        = t('.comments')
   .tab-content
     .tab-pane.active#tweets
       = render partial: 'shared/tweet', collection: @tweets
