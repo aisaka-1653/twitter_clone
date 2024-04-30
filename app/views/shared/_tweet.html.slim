@@ -9,6 +9,8 @@
         p.text-secondary.mb-0
           = "@#{tweet.user.username}"
       p.text-wrap.my-0
+        - if tweet.respond_to?(:username)
+          = link_to "@#{tweet.username}", tweet.tweet.user, class: "me-1"
         = tweet.content
   .card-footer.d-flex.justify-content-around.align-items-center.bg-white.border-0.py-0
     = link_to root_path do
