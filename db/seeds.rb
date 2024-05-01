@@ -9,7 +9,10 @@ ApplicationRecord.transaction do
       display_name: "display_name#{n}",
       username: "username#{n}",
       date_of_birth: '1997-11-27',
-      mobile_number: '00011112222'
+      mobile_number: '00011112222',
+      bio: "Webエンジニアに転職するため勉強中 #happinessChain 23.08.28〜",
+      location: "大分",
+      website: "https://www.google.co.jp"
     )
     user.skip_confirmation!
     user.save!
