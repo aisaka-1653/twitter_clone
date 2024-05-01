@@ -78,5 +78,4 @@ class User < ApplicationRecord
     header.attach(io: File.open(Rails.root.join('app/assets/images/users/default_header.png')),
                   filename: 'default_header.png', content_type: 'image/png')
   end
-
 end

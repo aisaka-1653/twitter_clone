@@ -12,7 +12,7 @@
         - if username_present?(tweet)
           = link_to "@#{tweet.username}", tweet.tweet.user, class: "me-1"
         = tweet.content
-  - if is_tweet?(tweet)
+  - if tweet?(tweet)
     .card-footer.d-flex.justify-content-around.align-items-center.bg-white.border-0.py-0
       = link_to root_path do
         .reaction-icon.reply-icon.py-2.px-2.rounded-circle 

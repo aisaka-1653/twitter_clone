@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
@@ -7,6 +9,5 @@ class UsersController < ApplicationController
     @comments = @user.comments.sorted.page(params[:comments_page])
   end
 
-  def edit
-  end
+  def edit; end
 end
