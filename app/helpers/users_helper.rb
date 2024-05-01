@@ -3,8 +3,12 @@ module UsersHelper
     current_user == user
   end
 
-  def username_present?(comment)
-    comment.respond_to?(:username) && comment.tweet_id.present?
+  def username_present?(tweet)
+    tweet.respond_to?(:username) && tweet.tweet_id.present?
+  end
+
+  def is_tweet?(tweet)
+    tweet.instance_of?(Tweet)
   end
 
   def liked_by_current_user?(tweet)
