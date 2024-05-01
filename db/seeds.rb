@@ -41,3 +41,15 @@ ApplicationRecord.transaction do
     end
   end
 end
+
+user = User.first
+user.avatar.attach(
+  io: File.open(Rails.root.join('app/assets/images/users/user1_avatar.jpg')),
+  filename: 'user1_avatar.jpg',
+  content_type: 'image/jpg'
+)
+user.header.attach(
+  io: File.open(Rails.root.join('app/assets/images/users/user1_header.png')),
+  filename: 'user1_header.png',
+  content_type: 'image/png'
+)
