@@ -7,3 +7,6 @@ ja:
       comments: コメント
       tweets_count: "%{count}件のツイート"
       edit_profile: プロフィールを編集
+      follow: フォロー
+      following: フォロー中
+      follower: フォロワー
