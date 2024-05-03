@@ -1,10 +1,14 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
-@import './users/form';
-@import './homes/sidebar';
-@import './homes/main';
-@import './homes/tweet_btn';
+@import './devise/form';
+@import './shared/sidebar';
+@import './shared/timeline';
+@import './shared/tweet_btn';
+@import './shared/link';
+@import './shared/avatar';
+@import './homes/tweet_form';
 @import './kaminari/pagination';
+@import './users/profile';
 
 html, body {
   min-height: 100dvh;
@@ -13,4 +17,8 @@ html, body {
 body {
   display: flex;
   flex-direction: column;
+}
+
+main {
+  margin-left: 292px;
 }

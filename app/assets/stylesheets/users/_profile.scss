@@ -1,0 +1,29 @@
+.profile {
+  width: 600px;
+}
+
+.avatar {
+  position: relative;
+  top: -68.5px;
+}
+
+.header-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.negative-margin {
+  margin-bottom: -68.5px;
+}
+
+.edit-profile-btn {
+  border: solid 1px #D5DEE2;
+  font-size: 15px;
+  font-weight: 600;
+  padding-inline: 14px;
+}
+
+.edit-profile-btn:hover {
+  border: solid 1px #D5DEE2;
+}
