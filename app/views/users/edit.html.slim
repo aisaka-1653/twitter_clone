@@ -1,4 +1,52 @@
-h1
-  | Users#edit
-p
-  | Find me in app/views/users/edit.html.erb
+.edit-profile.border.border-top-0.flex-shrink-0
+  .d-flex.flex-row.align-items-center.gap-3.mx-2.py-2
+    = link_to 'javascript:history.back()' do
+      .link.p-1.rounded-circle 
+        svg.bi.bi-arrow-left[xmlns="http://www.w3.org/2000/svg" width="24" height="16" fill="#0F1419" viewbox="0 2 16 14"]
+          path[fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" stroke="#536471" stroke-width="0.6"]
+    .fw-bold
+      = t('.edit_profile')
+    = link_to t('.save'), root_path, class: "btn btn-dark rounded-pill fw-semibold ms-auto px-3"
+  = form_with model: @user do |f|
+    .edit-image-negative-margin
+      = image_tag @user.header, class: "header-image dim-image header-preview"
+      .d-flex.justify-content-center
+        = f.label :header, class: "edit-btn header-pos rounded-circle" do
+          .edit-image-btn.cursor-pointer
+            svg.bi.bi-camera[xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewbox="0 0 16 16"]
+              path[d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"]
+              path[d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"]
+          = f.file_field :header, class: 'header-uploader', style: 'display:none'
+    .negative-margin.d-flex.flex-row.px-3
+      .d-flex.avatar
+        .bg-white.rounded-circle.p-1
+          = image_tag @user.avatar, size: "133x133", class: "avatar-image dim-image rounded-circle avatar-preview"
+          .edit-image-negative-margin.d-flex.justify-content-center
+            = f.label :avatar, class: "edit-btn avatar-pos rounded-circle" do
+              .edit-image-btn.cursor-pointer
+                svg.bi.bi-camera[xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewbox="0 0 16 16"]
+                  path[d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"]
+                  path[d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"]
+              = f.file_field :avatar, class: 'avatar-uploader', style: 'display:none'
+    .p-3
+      - if @user.errors.present?
+        ul#error_explanation.alert.alert-danger.mb-4
+          - @user.errors.full_messages.each do |message|
+            .px-3
+              li
+                = message
+      .form-floating.mb-4
+        = f.text_field :display_name, class: "form-control", placeholder: "display-name"
+        = f.label :display_name, class: "form-label"
+      .form-floating.mb-4
+        = f.text_area :bio, class: "bio form-control", placeholder: "bio"
+        = f.label :bio, class: "form-label"
+      .form-floating.mb-4
+        = f.text_field :location, class: "form-control", placeholder: "location"
+        = f.label :location, class: "form-label"
+      .form-floating.mb-4
+        = f.url_field :website, class: "form-control", placeholder: "website"
+        = f.label :website, class: "form-label"
+      .form-floating.mb-4
+        = f.date_field :date_of_birth, class: "form-control", placeholder: "date-of-birth"
+        = f.label :date_of_birth, class: "form-label"
