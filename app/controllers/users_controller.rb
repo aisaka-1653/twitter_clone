@@ -11,9 +11,21 @@ class UsersController < ApplicationController
 
   def edit; end
 
+  def update
+    if @user.update(user_params)
+      redirect_to user_url(@user)
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:header, :avatar, :display_name, :bio, :location, :website, :date_of_birth)
   end
 end
