@@ -7,6 +7,7 @@ class Tweet < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   # ツイートが削除されてもプロフィール画面では表示する
   has_many :comments, dependent: :nullify
+  has_one_attached :image
 
   scope :with_user_and_avatar, -> { includes(user: :avatar_attachment) }
   scope :sorted, -> { order(created_at: :desc) }
