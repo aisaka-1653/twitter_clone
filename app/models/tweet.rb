@@ -27,8 +27,8 @@ class Tweet < ApplicationRecord
   private
 
   def require_content_or_image
-    if content.blank? && !image.attached?
-      errors.add(:base, '文字か画像のどちらかは入力必須です')
-    end
+    return unless content.blank? && !image.attached?
+
+    errors.add(:base, '文字か画像のどちらかは入力必須です')
   end
 end
