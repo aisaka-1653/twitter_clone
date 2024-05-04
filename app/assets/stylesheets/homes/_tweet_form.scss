@@ -29,4 +29,6 @@
 #tweet-form {
   padding-top: 125px;
   margin-top: -125px;
+  position: relative;
+  z-index: 0;
 }
