@@ -2,7 +2,7 @@
 (function () {
   'use strict'
 
-  window.addEventListener('load', () => {
+  window.addEventListener('turbo:load', () => {
     const avatarUploader = document.querySelector('.avatar-uploader');
     const headerUploader = document.querySelector('.header-uploader');
 
