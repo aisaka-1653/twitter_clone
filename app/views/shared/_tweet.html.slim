@@ -11,7 +11,7 @@
       p.text-wrap.my-0
         - if username_present?(tweet)
           = link_to "@#{tweet.username}", tweet.tweet.user, class: "me-1"
-        = tweet.content
+        = safe_join(tweet.content.split("\n"),tag(:br))
       - if image_attached?(tweet)
         .pt-3
           = image_tag tweet.image, class: "timeline-image"
