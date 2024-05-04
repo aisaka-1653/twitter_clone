@@ -13,7 +13,7 @@ class Tweet < ApplicationRecord
   scope :sorted, -> { order(created_at: :desc) }
   scope :following_tweets, ->(user) { where(user_id: user.following_user_ids) }
 
-  validates :content, length: { maximum: 280 }
+  validates :content, length: { maximum: 140 }
   validate :require_content_or_image
 
   def self.feed_for(user)
