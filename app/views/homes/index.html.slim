@@ -6,7 +6,7 @@
     li.nav-item.tab
       a.nav-link.text-dark.py-0[data-bs-toggle="tab" data-bs-target="#following" type="button"]
         = t('.following')
-  = form_with model: @tweet, url: tweets_path, method: :post do |f|
+  = form_with model: @tweet, url: tweets_path, method: :post, data: {turbo: false} do |f|
     .card.border-0.border-bottom
       .card-body.d-flex.flex-column.pt-2
         .d-flex.flex-row.align-items-start.w-100.gap-3
