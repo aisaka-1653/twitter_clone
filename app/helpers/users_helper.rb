@@ -9,10 +9,6 @@ module UsersHelper
     tweet.respond_to?(:username) && tweet.tweet_id.present?
   end
 
-  def tweet?(tweet)
-    tweet.instance_of?(Tweet)
-  end
-
   def liked_by_current_user?(tweet)
     tweet.likes.exists?(user_id: current_user.id)
   end
