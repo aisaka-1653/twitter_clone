@@ -1,0 +1,44 @@
+.edit-profile {
+  width: 600px;
+  min-height: calc(100dvh - 71px);
+}
+
+.edit-image-btn {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+}
+
+.edit-btn {
+  background-color: rgba($color: #56595C, $alpha: 0.7);
+  position: relative;
+}
+
+.edit-btn:hover {
+  background-color: rgba($color: #646769, $alpha: 0.7);
+}
+
+.header-pos {
+  top: calc(-100px - 42px / 2);
+}
+
+.avatar-pos {
+  top: calc(-67.5px - 42px / 2);
+}
+
+.edit-image-negative-margin {
+  margin-bottom: -42px;
+}
+
+.dim-image {
+  filter: brightness(0.8);
+}
+
+.form-floating>.form-control.bio {
+  height: 96px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

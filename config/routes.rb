@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   }
   root 'homes#index'
   resources :homes, only: %i[index]
-  resources :users, only: %i[show edit]
+  resources :users, only: %i[show edit update]
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   resources :tasks
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

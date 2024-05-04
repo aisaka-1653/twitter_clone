@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  helper_method :current_user?
   before_action :configure_sign_up_params, if: :devise_controller?
   before_action :authenticate_user!
 
@@ -10,5 +11,11 @@ class ApplicationController < ActionController::Base
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up,
                                       keys: %i[email display_name username date_of_birth mobile_number])
+  end
+
+  private
+
+  def current_user?(user)
+    current_user == user
   end
 end

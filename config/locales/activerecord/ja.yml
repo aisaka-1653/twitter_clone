@@ -14,3 +14,6 @@ ja:
         username: ユーザー名
         date_of_birth: 生年月日
         mobile_number: 電話番号
+        bio: 自己紹介
+        location: 場所
+        website: ウェブサイト

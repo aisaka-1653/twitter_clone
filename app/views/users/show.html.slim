@@ -16,7 +16,7 @@
         = image_tag @user.avatar, size: "133x133", class: "avatar-image rounded-circle"
     - if current_user?(@user)
       .mt-2
-        = link_to t('.edit_profile'), edit_user_path(@user), class: "link btn edit-profile-btn rounded-pill"
+        = link_to t('.edit_profile'), edit_user_path(@user), class: "link btn edit-profile-btn rounded-pill", data: {turbo: false}
     - else
       .d-flex.flex-row.align-items-start.gap-2.mt-2
         = link_to root_path do

@@ -29,6 +29,7 @@ class User < ApplicationRecord
          :lockable, :omniauthable, omniauth_providers: %i[github]
 
   validates :email, :display_name, :username, :date_of_birth, :mobile_number, presence: true
+  validates :bio, length: { maximum: 160 }
   validates :uid, uniqueness: { scope: :provider }
 
   def self.from_omniauth(auth)
