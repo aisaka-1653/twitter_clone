@@ -24,3 +24,9 @@
   top: 15px;
   right: 10px;
 }
+
+// ページ内遷移でheaderとtabの高さを考慮する
+#tweet-form {
+  padding-top: 125px;
+  margin-top: -125px;
+}
