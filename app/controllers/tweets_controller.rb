@@ -1,13 +1,10 @@
 class TweetsController < ApplicationController
   def create
     @tweet = current_user.tweets.build(tweet_params)
-    if @tweet.save
-      redirect_to root_path
-    else
-      @all_tweets = Tweet.sorted.page(params[:all_page])
-      @following_tweets = Tweet.feed_for(current_user).page(params[:following_page])
-      render 'homes/index', status: :unprocessable_entity
+    unless @tweet.save
+      flash[:danger] = @tweet.errors.full_messages[0]
     end
+    redirect_to root_path
   end
 
   private
