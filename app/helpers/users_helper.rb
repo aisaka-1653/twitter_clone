@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 module UsersHelper
-  def current_user?(user)
-    current_user == user
-  end
-
   def username_present?(tweet)
     tweet.respond_to?(:username) && tweet.tweet_id.present?
   end

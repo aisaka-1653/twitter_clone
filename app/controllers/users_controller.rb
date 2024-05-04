@@ -2,6 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :set_user
+  before_action :authorize_user!, only: %i[edit update]
   def show
     @tweets = @user.tweets.sorted.page(params[:tweets_page])
     @likes = Tweet.preload_user_and_avatar(@user.liked_tweets).page(params[:likes_page])
@@ -27,5 +28,11 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:header, :avatar, :display_name, :bio, :location, :website, :date_of_birth)
+  end
+
+  def authorize_user!
+    return if current_user?(@user)
+
+    redirect_to user_url(@user), alert: 'アクセス権限がありません'
   end
 end
