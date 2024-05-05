@@ -78,10 +78,7 @@
   cursor: pointer;
 }
 
-:not(.tweet-detail) > .tweet:hover {
-  background-color:	#F7F7F7;
-}
-
+:not(.tweet-detail) > .tweet:hover,
 :not(.tweet-detail) > .tweet:hover .actions {
   background-color:	#F7F7F7;
 }
