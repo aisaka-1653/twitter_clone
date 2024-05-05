@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 module UsersHelper
-  def username_present?(tweet)
-    tweet.respond_to?(:username) && tweet.tweet_id.present?
-  end
-
   def liked_by_current_user?(tweet)
     tweet.likes.exists?(user_id: current_user.id)
   end
