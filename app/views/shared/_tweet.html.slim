@@ -8,7 +8,7 @@
           = tweet.user.display_name
         p.text-secondary.mb-0
           = "@#{tweet.user.username}"
-      p.text-wrap.my-0
+      p.text-break.my-0
         = safe_join(tweet.content.split("\n"),tag(:br))
       - if image_attached?(tweet)
         .pt-3

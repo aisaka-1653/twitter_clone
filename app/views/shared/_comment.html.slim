@@ -8,6 +8,6 @@
           = comment.user.display_name
         p.text-secondary.mb-0
           = "@#{comment.user.username}"
-      p.text-wrap.my-0
+      p.text-break.my-0
         = link_to "@#{comment.username}", comment.tweet.user, class: "me-1"
         = safe_join(comment.content.split("\n"),tag(:br))
