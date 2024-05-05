@@ -7,7 +7,7 @@
     .fw-bold
       = t('.tweet')
   = render 'shared/tweet', tweet: @tweet
-  = form_with model: @comment, url: root_path, method: :post do |f|
+  = form_with model: [@tweet, @comment] do |f|
     .card.border-0.border-bottom
       .card-body.py-1
         p.text-secondary.small.ms-5

@@ -9,7 +9,7 @@ class TweetsController < ApplicationController
 
   def show
     @tweet = Tweet.find(params[:id])
-    @comment = current_user.comments.new
+    @comment = current_user.comments.build
   end
 
   private
