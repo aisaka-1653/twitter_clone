@@ -1,2 +1,24 @@
-h1
-  | Show
+.tweet-detail.border.border-top-0.flex-shrink-0
+  .d-flex.flex-row.align-items-center.gap-3.mx-2.py-2
+    = link_to 'javascript:history.back()' do
+      .link.p-1.rounded-circle
+        svg.bi.bi-arrow-left[xmlns="http://www.w3.org/2000/svg" width="24" height="16" fill="#0F1419" viewbox="0 2 16 14"]
+          path[fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" stroke="#536471" stroke-width="0.6"]
+    .fw-bold
+      = t('.tweet')
+  = render 'shared/tweet', tweet: @tweet
+  = form_with model: @comment, url: root_path, method: :post do |f|
+    .card.border-0.border-bottom
+      .card-body.py-1
+        p.text-secondary.small.ms-5
+          = t('.replying_to')
+          span
+            = link_to "@#{@tweet.user.username}", @tweet.user, class: "text-decoration-none"
+        .d-flex.flex-row.gap-2
+          = link_to current_user do
+            = image_tag current_user.avatar, size: "40x40", class: "avatar-image rounded-circle m-0 "
+          = f.text_area :content, class: "form-control-plaintext w-100", placeholder: t('.tweet_your_reply')
+      .card-footer.border-0.text-end.pb-3
+        = f.submit t('.reply'), class: "btn reply-btn rounded-pill"
+  - if @tweet.comments.present?
+    = render partial: 'shared/comment', collection: @tweet.comments
