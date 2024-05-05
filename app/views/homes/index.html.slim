@@ -1,23 +1,27 @@
 .timeline.border.border-top-0.flex-shrink-0
-  ul.nav.nav-fill.align-items-center.border-bottom.text-center
+  ul.tab-bar.nav.nav-fill.align-items-center.border-bottom.text-center
     li.nav-item.tab
       a.nav-link.active.text-dark.py-0[data-bs-toggle="tab" data-bs-target="#recommendation" type="button"]
         = t('.for_you')
     li.nav-item.tab
       a.nav-link.text-dark.py-0[data-bs-toggle="tab" data-bs-target="#following" type="button"]
         = t('.following')
-  .card.border-0.border-bottom
-    .card-body.d-flex.flex-row.align-items-center.py-1.gap-3
-      = link_to current_user do
-        = image_tag current_user.avatar, size: "40x40", class: "avatar-image rounded-circle m-0"
-      textarea.form-control-plaintext.w-100[placeholder="いまどうしてる？"]
-    .card-footer.d-flex.justify-content-between.align-items-center.bg-white.border-0.py-0
-      = link_to root_path do
-        .nav-item.py-2.px-2.rounded-circle 
-          svg.bi.bi-image[xmlns="http://www.w3.org/2000/svg" width="24" height="16" fill="#1DA1F2" viewbox="0 0 16 16"]
-            path[d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"]
-            path[d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"]
-      = link_to t('.tweet'), root_path, class: "btn tweet-btn rounded-pill"
+  = form_with model: @tweet, url: tweets_path, method: :post do |f|
+    .card.border-0.border-bottom
+      .card-body.d-flex.flex-column.pt-2
+        .d-flex.flex-row.align-items-start.w-100.gap-3
+          = link_to current_user do
+            = image_tag current_user.avatar, size: "40x40", class: "avatar-image rounded-circle m-0"
+          #tweet-form.w-100
+            = f.text_area :content, class: "form-control-plaintext w-100", placeholder: "いまどうしてる？"
+      .card-footer.d-flex.justify-content-between.align-items-center.bg-white.border-0.py-0
+        = f.label :image do
+          .nav-item.py-2.px-2.rounded-circle 
+            svg.bi.bi-image[xmlns="http://www.w3.org/2000/svg" width="24" height="16" fill="#1DA1F2" viewbox="0 0 16 16"]
+              path[d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"]
+              path[d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"]
+          = f.file_field :image, class: 'image-uploader', style: 'display:none'
+        = f.submit t('.tweet'), class: "btn tweet-btn rounded-pill"
   .tab-content
     .tab-pane.active#recommendation
       = render partial: 'shared/tweet', collection: @all_tweets

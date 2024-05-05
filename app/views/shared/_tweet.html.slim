@@ -2,7 +2,7 @@
   .card-body.d-flex.flex-row.align-items-start.py-2.gap-3
     = link_to tweet.user do
       = image_tag tweet.user.avatar, size: "40x40", class: "avatar-image rounded-circle m-0 "
-    .d-flex.flex-column
+    .d-flex.flex-column.w-100
       .d-flex.flex-row.gap-1
         p.display-name
           = tweet.user.display_name
@@ -11,7 +11,10 @@
       p.text-wrap.my-0
         - if username_present?(tweet)
           = link_to "@#{tweet.username}", tweet.tweet.user, class: "me-1"
-        = tweet.content
+        = safe_join(tweet.content.split("\n"),tag(:br))
+      - if image_attached?(tweet)
+        .pt-3
+          = image_tag tweet.image, class: "timeline-image"
   - if tweet?(tweet)
     .card-footer.d-flex.justify-content-around.align-items-center.bg-white.border-0.py-0
       = link_to root_path do

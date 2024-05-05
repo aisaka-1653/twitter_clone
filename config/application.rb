@@ -30,5 +30,6 @@ module Myapp
     end
     config.action_view.default_form_builder = 'ApplicationFormBuilder'
     config.i18n.default_locale = :ja
+    config.action_view.field_error_proc = proc { |html_tag, _instance| html_tag }
   end
 end
