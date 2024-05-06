@@ -17,6 +17,10 @@ class Tweet < ApplicationRecord
   validates :content, length: { maximum: 140 }
   validate :require_content_or_image
 
+  def find_user_interaction(user, type)
+    interactions.find_by(user_id: user.id, type: type)
+  end
+
   def self.feed_for(user)
     following_tweets(user).with_user_and_avatar.sorted
   end
