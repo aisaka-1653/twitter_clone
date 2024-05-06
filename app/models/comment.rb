@@ -8,9 +8,4 @@ class Comment < ApplicationRecord
 
   validates :content, presence: true
   validates :content, length: { maximum: 140 }
-
-  def assign_user_and_username(user)
-    self.user = user
-    self.username = tweet.user.username
-  end
 end

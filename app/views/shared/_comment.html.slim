@@ -7,7 +7,8 @@
         p.display-name
           = comment.user.display_name
         p.text-secondary.mb-0
-          = "@#{comment.user.username}"
+          = sender(comment)
       p.text-break.my-0
-        = link_to "@#{comment.username}", comment.tweet.user, class: "me-1"
+        - if comment.tweet.present?
+          = link_to receiver(comment), comment.tweet.user, class: "me-1"
         = safe_join(comment.content.split("\n"),tag(:br))
