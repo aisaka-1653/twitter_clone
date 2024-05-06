@@ -98,6 +98,6 @@
       .d-flex.flex-column.align-items-center.py-2
         = paginate @retweets, param_name: :retweets_page
     .tab-pane#comments
-      = render partial: 'shared/tweet', collection: @comments
+      = render partial: 'shared/comment', collection: @comments
       .d-flex.flex-column.align-items-center.py-2
         = paginate @comments, param_name: :comments_page

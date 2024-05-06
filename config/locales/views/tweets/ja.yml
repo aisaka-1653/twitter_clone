@@ -1,0 +1,7 @@
+ja:
+  tweets:
+    show:
+      tweet: ツイートする
+      reply: 返信
+      replying_to: "返信先: "
+      tweet_your_reply: 返信をツイート

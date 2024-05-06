@@ -10,6 +10,7 @@
 @import './kaminari/pagination';
 @import './users/profile';
 @import './users/edit_profile';
+@import './tweets/tweet_detail';
 
 html, body {
   min-height: 100dvh;
@@ -26,4 +27,8 @@ main {
 
 textarea {
   resize: none;
+}
+
+.card-footer {
+  background-color: white;
 }

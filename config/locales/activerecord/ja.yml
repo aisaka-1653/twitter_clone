@@ -9,6 +9,7 @@ ja:
     models:
       user: ユーザー
       tweet: ツイート
+      comment: コメント
     attributes:
       user:
         display_name: 表示名
@@ -21,3 +22,5 @@ ja:
       tweet:
         content: ツイート
         image: 画像
+      comment:
+        content: コメント

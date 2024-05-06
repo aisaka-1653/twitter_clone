@@ -1,0 +1,13 @@
+.card.border-0.border-bottom
+  .card-body.d-flex.flex-row.align-items-start.py-2.gap-3
+    = link_to comment.user do
+      = image_tag comment.user.avatar, size: "40x40", class: "avatar-image rounded-circle m-0 "
+    .d-flex.flex-column.w-100
+      .d-flex.flex-row.gap-1
+        p.display-name
+          = comment.user.display_name
+        p.text-secondary.mb-0
+          = "@#{comment.user.username}"
+      p.text-break.my-0
+        = link_to "@#{comment.username}", comment.tweet.user, class: "me-1"
+        = safe_join(comment.content.split("\n"),tag(:br))
