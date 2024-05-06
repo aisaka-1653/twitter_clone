@@ -18,7 +18,7 @@ class Tweet < ApplicationRecord
   validate :require_content_or_image
 
   def find_user_interaction(user, type)
-    interactions.find_by(user_id: user.id, type: type)
+    interactions.find_by(user_id: user.id, type:)
   end
 
   def self.feed_for(user)

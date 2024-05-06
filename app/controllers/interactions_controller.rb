@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InteractionsController < ApplicationController
   before_action :set_tweet
 

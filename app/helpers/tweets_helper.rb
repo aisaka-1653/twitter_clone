@@ -7,8 +7,8 @@ module TweetsHelper
 
   def likes_count(tweet)
     count = tweet.likes.count
-    if count > 0
-      content_tag(:span, count, class: 'text-secondary small')
-    end
+    return unless count.positive?
+
+    content_tag(:span, count, class: 'text-secondary small')
   end
 end
