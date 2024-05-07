@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :tweets, only: %i[create show]
   resources :tweets do
     resources :comments, only: %i[create]
+    resources :likes, only: %i[create destroy]
   end
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   resources :tasks

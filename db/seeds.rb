@@ -35,7 +35,6 @@ ApplicationRecord.transaction do
         user.comments.create!(
           tweet:,
           content: "#{other_user.display_name}さん!はじめまして!",
-          username: other_user.username
         )
       end
     end

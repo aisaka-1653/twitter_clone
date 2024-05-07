@@ -10,6 +10,7 @@ ja:
       user: ユーザー
       tweet: ツイート
       comment: コメント
+      interaction: インタラクション
     attributes:
       user:
         display_name: 表示名
@@ -24,3 +25,5 @@ ja:
         image: 画像
       comment:
         content: コメント
+      interaction:
+        type: タイプ

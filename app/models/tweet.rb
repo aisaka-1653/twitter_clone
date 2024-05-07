@@ -2,6 +2,7 @@
 
 class Tweet < ApplicationRecord
   belongs_to :user
+  has_many :interactions, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :retweets, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
@@ -15,6 +16,10 @@ class Tweet < ApplicationRecord
 
   validates :content, length: { maximum: 140 }
   validate :require_content_or_image
+
+  def find_user_interaction(user, type)
+    interactions.find_by(user_id: user.id, type:)
+  end
 
   def self.feed_for(user)
     following_tweets(user).with_user_and_avatar.sorted
