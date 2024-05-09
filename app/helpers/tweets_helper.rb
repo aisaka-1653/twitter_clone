@@ -11,4 +11,11 @@ module TweetsHelper
 
     content_tag(:span, count, class: 'text-secondary small')
   end
+
+  def retweets_count(tweet)
+    count = tweet.retweets.count
+    return unless count.positive?
+
+    content_tag(:span, count, class: 'text-secondary small')
+  end
 end
