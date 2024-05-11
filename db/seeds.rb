@@ -34,7 +34,7 @@ ApplicationRecord.transaction do
         user.bookmarks.create!(tweet:)
         user.comments.create!(
           tweet:,
-          content: "#{other_user.display_name}さん!はじめまして!",
+          content: "#{other_user.display_name}さん!はじめまして!"
         )
       end
     end

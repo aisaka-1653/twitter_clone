@@ -10,7 +10,7 @@ class Tweet < ApplicationRecord
   has_many :comments, dependent: :nullify
   has_one_attached :image
 
-  scope :with_preload_associations, -> {
+  scope :with_preload_associations, lambda {
     includes(
       image_attachment: :blob,
       user: { avatar_attachment: :blob },
@@ -45,13 +45,18 @@ class Tweet < ApplicationRecord
 
   def self.with_retweets
     joins("LEFT JOIN interactions AS retweets ON tweets.id = retweets.tweet_id AND retweets.type = 'Retweet'")
-      .select('tweets.id, tweets.user_id, tweets.content, COALESCE(retweets.created_at, tweets.created_at) AS created_at')
+      .select(
+        'tweets.id',
+        'tweets.user_id',
+        'tweets.content',
+        'COALESCE(retweets.created_at, tweets.created_at) AS created_at'
+      )
       .with_preload_associations
       .order('created_at DESC')
   end
 
   def self.with_retweets_by_user(user)
-    with_retweets.where("tweets.user_id = ?", user.id)
+    with_retweets.where('tweets.user_id = ?', user.id)
   end
 
   private
