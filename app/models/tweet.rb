@@ -37,10 +37,7 @@ class Tweet < ApplicationRecord
   end
 
   def self.preload_user_and_avatar(tweets)
-    tweets
-      .joins("LEFT JOIN interactions AS retweets ON tweets.id = retweets.tweet_id AND retweets.type = 'Retweet'")
-      .with_preload_associations
-      .order('retweets.created_at DESC')
+    tweets.with_preload_associations.order('interactions.created_at DESC')
   end
 
   def self.with_retweets
@@ -56,7 +53,7 @@ class Tweet < ApplicationRecord
   end
 
   def self.with_retweets_by_user(user)
-    with_retweets.where('tweets.user_id = ?', user.id)
+    with_retweets.where('tweets.user_id = ? or retweets.user_id = ?', user.id, user.id)
   end
 
   private
