@@ -32,6 +32,9 @@ class Tweet < ApplicationRecord
   def self.with_retweets
     Tweet.select('tweets.id, tweets.user_id, tweets.content, COALESCE(retweets.created_at, tweets.created_at) AS created_at')
       .joins("LEFT JOIN interactions AS retweets ON tweets.id = retweets.tweet_id AND retweets.type = 'Retweet'")
+      .with_attached_image.includes(image_attachment: :blob)
+      .includes(user: { avatar_attachment: :blob })
+      .includes(:interactions)
       .order('created_at DESC')
   end
 
@@ -39,6 +42,9 @@ class Tweet < ApplicationRecord
     Tweet.select('tweets.id, tweets.user_id, tweets.content, COALESCE(retweets.created_at, tweets.created_at) AS created_at')
       .joins("LEFT JOIN interactions AS retweets ON tweets.id = retweets.tweet_id AND retweets.type = 'Retweet' AND retweets.user_id = #{user.id}")
       .where("tweets.user_id = ?", user.id)
+      .with_attached_image.includes(image_attachment: :blob)
+      .includes(user: { avatar_attachment: :blob })
+      .includes(:interactions, :likes, :retweets, :bookmarks)
       .order('created_at DESC')
   end
 
