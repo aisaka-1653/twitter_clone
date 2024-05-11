@@ -42,7 +42,7 @@ class Tweet < ApplicationRecord
       .joins("LEFT JOIN interactions AS retweets ON tweets.id = retweets.tweet_id AND retweets.type = 'Retweet'")
       .with_attached_image.includes(image_attachment: :blob)
       .includes(user: { avatar_attachment: :blob })
-      .includes(:interactions)
+      .includes(:interactions, :likes, :retweets, :bookmarks)
       .order('created_at DESC')
   end
 
