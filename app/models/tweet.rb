@@ -10,7 +10,15 @@ class Tweet < ApplicationRecord
   has_many :comments, dependent: :nullify
   has_one_attached :image
 
-  scope :with_user_and_avatar, -> { includes(user: :avatar_attachment) }
+  scope :with_user_avatar_and_interacitons, -> {
+    with_attached_image.includes(
+      user: { avatar_attachment: :blob },
+      interactions: [],
+      likes: [],
+      retweets: [],
+      bookmarks: []
+    )
+  }
   scope :sorted, -> { order(created_at: :desc) }
   scope :following_tweets, ->(user) { where(user_id: user.following_user_ids) }
 
@@ -18,7 +26,7 @@ class Tweet < ApplicationRecord
   validate :require_content_or_image
 
   def find_user_interaction(user, type)
-    interactions.find_by(user_id: user.id, type:)
+    interactions.find { |interaction| interaction.user_id == user.id && interaction.type == type }
   end
 
   def self.feed_for(user)
@@ -26,7 +34,7 @@ class Tweet < ApplicationRecord
   end
 
   def self.preload_user_and_avatar(tweets)
-    tweets.with_user_and_avatar.sorted
+    tweets.with_user_avatar_and_interacitons.sorted
   end
 
   def self.with_retweets
