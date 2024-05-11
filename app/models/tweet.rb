@@ -10,8 +10,9 @@ class Tweet < ApplicationRecord
   has_many :comments, dependent: :nullify
   has_one_attached :image
 
-  scope :with_user_avatar_and_interacitons, -> {
-    with_attached_image.includes(
+  scope :with_preload_associations, -> {
+    includes(
+      image_attachment: :blob,
       user: { avatar_attachment: :blob },
       interactions: [],
       likes: [],
@@ -30,30 +31,27 @@ class Tweet < ApplicationRecord
   end
 
   def self.feed_for(user)
-    following_tweets(user).with_user_avatar_and_interacitons.sorted
+    following_tweets(user)
+      .with_preload_associations
+      .sorted
   end
 
   def self.preload_user_and_avatar(tweets)
-    tweets.with_user_avatar_and_interacitons.sorted
+    tweets
+      .joins("LEFT JOIN interactions AS retweets ON tweets.id = retweets.tweet_id AND retweets.type = 'Retweet'")
+      .with_preload_associations
+      .order('retweets.created_at DESC')
   end
 
   def self.with_retweets
-    Tweet.select('tweets.id, tweets.user_id, tweets.content, COALESCE(retweets.created_at, tweets.created_at) AS created_at')
-      .joins("LEFT JOIN interactions AS retweets ON tweets.id = retweets.tweet_id AND retweets.type = 'Retweet'")
-      .with_attached_image.includes(image_attachment: :blob)
-      .includes(user: { avatar_attachment: :blob })
-      .includes(:interactions, :likes, :retweets, :bookmarks)
+    joins("LEFT JOIN interactions AS retweets ON tweets.id = retweets.tweet_id AND retweets.type = 'Retweet'")
+      .select('tweets.id, tweets.user_id, tweets.content, COALESCE(retweets.created_at, tweets.created_at) AS created_at')
+      .with_preload_associations
       .order('created_at DESC')
   end
 
   def self.with_retweets_by_user(user)
-    Tweet.select('tweets.id, tweets.user_id, tweets.content, COALESCE(retweets.created_at, tweets.created_at) AS created_at')
-      .joins("LEFT JOIN interactions AS retweets ON tweets.id = retweets.tweet_id AND retweets.type = 'Retweet' AND retweets.user_id = #{user.id}")
-      .where("tweets.user_id = ?", user.id)
-      .with_attached_image.includes(image_attachment: :blob)
-      .includes(user: { avatar_attachment: :blob })
-      .includes(:interactions, :likes, :retweets, :bookmarks)
-      .order('created_at DESC')
+    with_retweets.where("tweets.user_id = ?", user.id)
   end
 
   private
