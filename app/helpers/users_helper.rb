@@ -2,14 +2,14 @@
 
 module UsersHelper
   def liked_by_current_user?(tweet)
-    tweet.likes.exists?(user_id: current_user.id)
+    tweet.likes.any? { |like| like.user_id == current_user.id }
   end
 
   def retweeted_by_current_user?(tweet)
-    tweet.retweets.exists?(user_id: current_user.id)
+    tweet.retweets.any? { |retweet| retweet.user_id == current_user.id }
   end
 
   def bookmarked_by_current_user?(tweet)
-    tweet.bookmarks.exists?(user_id: current_user.id)
+    tweet.bookmarks.any? { |bookmark| bookmark.user_id == current_user.id }
   end
 end
