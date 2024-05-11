@@ -30,7 +30,7 @@ class Tweet < ApplicationRecord
   end
 
   def self.feed_for(user)
-    following_tweets(user).with_user_and_avatar.sorted
+    following_tweets(user).with_user_avatar_and_interacitons.sorted
   end
 
   def self.preload_user_and_avatar(tweets)
