@@ -35,6 +35,13 @@ class Tweet < ApplicationRecord
       .order('created_at DESC')
   end
 
+  def self.with_retweets_by_user(user)
+    Tweet.select('tweets.id, tweets.user_id, tweets.content, COALESCE(retweets.created_at, tweets.created_at) AS created_at')
+      .joins("LEFT JOIN interactions AS retweets ON tweets.id = retweets.tweet_id AND retweets.type = 'Retweet' AND retweets.user_id = #{user.id}")
+      .where("tweets.user_id = ?", user.id)
+      .order('created_at DESC')
+  end
+
   private
 
   def require_content_or_image
