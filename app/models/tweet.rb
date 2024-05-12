@@ -21,7 +21,6 @@ class Tweet < ApplicationRecord
     )
   }
   scope :sorted, -> { order(created_at: :desc) }
-  scope :following_tweets, ->(user) { where(user_id: user.following_user_ids) }
 
   validates :content, length: { maximum: 140 }
   validate :require_content_or_image
@@ -46,14 +45,20 @@ class Tweet < ApplicationRecord
         'tweets.id',
         'tweets.user_id',
         'tweets.content',
-        'COALESCE(retweets.created_at, tweets.created_at) AS created_at'
+        'MAX(COALESCE(retweets.created_at, tweets.created_at)) AS created_at'
       )
+      .group('tweets.id')
       .with_preload_associations
       .order('created_at DESC')
   end
 
   def self.with_retweets_by_user(user)
     with_retweets.where('tweets.user_id = ? or retweets.user_id = ?', user.id, user.id)
+  end
+
+  def self.following_tweets(user)
+    with_retweets.where('tweets.user_id IN (?) or retweets.user_id IN (?)', user.following_user_ids,
+                        user.following_user_ids)
   end
 
   private
