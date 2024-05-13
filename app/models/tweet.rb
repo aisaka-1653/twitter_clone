@@ -40,24 +40,24 @@ class Tweet < ApplicationRecord
   end
 
   def self.with_retweets
-    joins("LEFT JOIN interactions AS retweets ON tweets.id = retweets.tweet_id AND retweets.type = 'Retweet'")
+    left_outer_joins(:retweets)
       .select(
         'tweets.id',
         'tweets.user_id',
         'tweets.content',
-        'MAX(COALESCE(retweets.created_at, tweets.created_at)) AS created_at'
+        'MAX(COALESCE(interactions.created_at, tweets.created_at)) AS last_updated_at'
       )
-      .group('tweets.id')
+      .group(:id)
       .with_preload_associations
-      .order('created_at DESC')
+      .order(last_updated_at: :desc)
   end
 
   def self.with_retweets_by_user(user)
-    with_retweets.where('tweets.user_id = ? or retweets.user_id = ?', user.id, user.id)
+    with_retweets.where('tweets.user_id = ? or interactions.user_id = ?', user.id, user.id)
   end
 
   def self.following_tweets(user)
-    with_retweets.where('tweets.user_id IN (?) or retweets.user_id IN (?)', user.following_user_ids,
+    with_retweets.where('tweets.user_id IN (?) or interactions.user_id IN (?)', user.following_user_ids,
                         user.following_user_ids)
   end
 
