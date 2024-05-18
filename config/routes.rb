@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :homes, only: %i[index]
   resources :users, only: %i[show edit update]
   resources :users do
-    resources :follows, only: %i[create destroy]
+    resource :follows, only: %i[create destroy]
   end
   resources :tweets, only: %i[create show]
   resources :tweets do
