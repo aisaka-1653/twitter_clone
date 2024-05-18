@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class InteractionsController < ApplicationController
-  before_action :set_tweet
+  before_action :set_tweet, only: %i[create destroy]
 
   def create
     interaction = @tweet.interactions.build(user: current_user, type: params[:type])

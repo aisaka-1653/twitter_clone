@@ -1,0 +1,9 @@
+.timeline.border.border-top-0.flex-shrink-0
+  .d-flex.flex-column.align-items-start.px-3.py-2
+    h2.fw-bold.fs-5.m-0
+      = Bookmark.model_name.human
+    h3.small.text-secondary.m-0
+      = "@#{current_user.username}"
+  = render partial: 'shared/tweet', collection: @tweets
+  .d-flex.flex-column.align-items-center.py-2
+    = paginate @tweets
