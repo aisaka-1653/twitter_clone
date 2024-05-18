@@ -8,7 +8,7 @@
           = tweet.user.display_name
         p.text-secondary.mb-0
           = "@#{tweet.user.username}"
-        - unless current_user == tweet.user
+        - unless current_user?(tweet.user)
           .more-option.ms-auto.follow-link.link.rounded-circle
             #modalOpen
               svg.bi.bi-three-dots[xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#536471" viewbox="0 0 16 16"]
