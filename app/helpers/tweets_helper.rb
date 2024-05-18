@@ -6,7 +6,14 @@ module TweetsHelper
   end
 
   def likes_count(tweet)
-    count = tweet.likes.count
+    count = tweet.likes.size
+    return unless count.positive?
+
+    content_tag(:span, count, class: 'text-secondary small')
+  end
+
+  def retweets_count(tweet)
+    count = tweet.retweets.size
     return unless count.positive?
 
     content_tag(:span, count, class: 'text-secondary small')

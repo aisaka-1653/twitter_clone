@@ -10,23 +10,55 @@ class Tweet < ApplicationRecord
   has_many :comments, dependent: :nullify
   has_one_attached :image
 
-  scope :with_user_and_avatar, -> { includes(user: :avatar_attachment) }
+  scope :with_preload_associations, lambda {
+    includes(
+      image_attachment: :blob,
+      user: { avatar_attachment: :blob },
+      interactions: [],
+      likes: [],
+      retweets: [],
+      bookmarks: []
+    )
+  }
   scope :sorted, -> { order(created_at: :desc) }
-  scope :following_tweets, ->(user) { where(user_id: user.following_user_ids) }
 
   validates :content, length: { maximum: 140 }
   validate :require_content_or_image
 
   def find_user_interaction(user, type)
-    interactions.find_by(user_id: user.id, type:)
+    interactions.find { |interaction| interaction.user_id == user.id && interaction.type == type }
   end
 
   def self.feed_for(user)
-    following_tweets(user).with_user_and_avatar.sorted
+    following_tweets(user)
+      .with_preload_associations
+      .sorted
   end
 
   def self.preload_user_and_avatar(tweets)
-    tweets.with_user_and_avatar.sorted
+    tweets.with_preload_associations.order('interactions.created_at DESC')
+  end
+
+  def self.with_retweets
+    left_outer_joins(:retweets)
+      .select(
+        'tweets.id',
+        'tweets.user_id',
+        'tweets.content',
+        'MAX(COALESCE(interactions.created_at, tweets.created_at)) AS last_updated_at'
+      )
+      .group(:id)
+      .with_preload_associations
+      .order(last_updated_at: :desc)
+  end
+
+  def self.with_retweets_by_user(user)
+    with_retweets.where('tweets.user_id = ? or interactions.user_id = ?', user.id, user.id)
+  end
+
+  def self.following_tweets(user)
+    with_retweets.where('tweets.user_id IN (?) or interactions.user_id IN (?)', user.following_user_ids,
+                        user.following_user_ids)
   end
 
   private
