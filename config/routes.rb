@@ -18,7 +18,9 @@ Rails.application.routes.draw do
     resources :comments, only: %i[create]
     resources :likes, only: %i[create destroy]
     resources :retweets, only: %i[create destroy]
+    resources :bookmarks, only: %i[create destroy]
   end
+  resources :bookmarks, only: %i[index]
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   resources :tasks
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
