@@ -18,4 +18,11 @@ module TweetsHelper
 
     content_tag(:span, count, class: 'text-secondary small')
   end
+
+  def bookmarks_count(tweet)
+    count = tweet.bookmarks.size
+    return unless count.positive?
+
+    content_tag(:span, count, class: 'text-secondary small')
+  end
 end
