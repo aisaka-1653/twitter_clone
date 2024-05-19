@@ -21,6 +21,9 @@ class User < ApplicationRecord
   has_many :retweeted_tweets, through: :retweets, source: :tweet
   has_many :bookmarked_tweets, through: :bookmarks, source: :tweet
 
+  has_many :room_users, dependent: :destroy
+  has_many :messages, dependent: :destroy
+
   has_one_attached :avatar
   has_one_attached :header
 
