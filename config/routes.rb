@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'follows/create'
+  get 'follows/destroy'
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations'
@@ -8,6 +10,9 @@ Rails.application.routes.draw do
   root 'homes#index'
   resources :homes, only: %i[index]
   resources :users, only: %i[show edit update]
+  resources :users do
+    resource :follows, only: %i[create destroy]
+  end
   resources :tweets, only: %i[create show]
   resources :tweets do
     resources :comments, only: %i[create]

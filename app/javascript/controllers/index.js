@@ -6,6 +6,7 @@ import { application } from "./application"
 import "./profile_image_preview"
 import "./tweet_image_preview"
 import "./tweet_click"
+import "./popup"
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)

@@ -6,7 +6,7 @@
     if (!location.pathname.includes('/tweets/')) {
       document.querySelectorAll('.tweet').forEach(tweet => {
         tweet.addEventListener('click', function(event) {
-          const ignoredClasses = ['.user-link', '.comment-link', '.rt-link', '.like-link', '.bookmark-link'];
+          const ignoredClasses = ['.user-link', '.comment-link', '.rt-link', '.like-link', '.bookmark-link', '.follow-link'];
           const isIgnoredClick = ignoredClasses.some(className => event.target.closest(className));
 
           if (!isIgnoredClick) {

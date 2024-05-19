@@ -6,8 +6,8 @@ class User < ApplicationRecord
   after_create :set_default_avatar, :set_default_header
 
   has_many :tweets, dependent: :destroy
-  has_many :followers, class_name: 'Follow', foreign_key: 'follower_id', dependent: :destroy, inverse_of: :followee
-  has_many :followees, class_name: 'Follow', foreign_key: 'followee_id', dependent: :destroy, inverse_of: :follower
+  has_many :followers, class_name: 'Follow', foreign_key: 'follower_id', dependent: :destroy, inverse_of: :follower
+  has_many :followees, class_name: 'Follow', foreign_key: 'followee_id', dependent: :destroy, inverse_of: :followee
   has_many :following_users, through: :followers, source: :followee
   has_many :follower_users, through: :followees, source: :follower
 
@@ -32,6 +32,10 @@ class User < ApplicationRecord
   validates :email, :display_name, :username, :date_of_birth, :mobile_number, presence: true
   validates :bio, length: { maximum: 160 }
   validates :uid, uniqueness: { scope: :provider }
+
+  def following?(user)
+    following_users.include?(user)
+  end
 
   def self.from_omniauth(auth)
     find_or_create_by(provider: auth.provider, uid: auth.uid) do |user|

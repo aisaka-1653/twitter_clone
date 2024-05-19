@@ -1,0 +1,81 @@
+.tweet {
+  position: relative;
+}
+
+:not(.tweet-detail) > .tweet {
+  cursor: pointer;
+}
+
+:not(.tweet-detail) > .tweet:hover:not(.modal-open),
+:not(.tweet-detail) > .tweet:hover:not(.modal-open) .actions {
+  background-color:	#F7F7F7;
+}
+
+.card {
+  border-radius: 0px;
+}
+
+.follow-link {
+  display: grid;
+  place-items: center;
+  width: 34.75px;
+  height: 34.75px;
+  margin: -8px;
+}
+
+.follow-link:hover {
+  background-color:	#E1EEF6;
+}
+
+#easyModal {
+  position: absolute;
+  top: 5px;
+  z-index: 15;
+}
+
+.menu {
+  background-color: white;
+  width: fit-content;
+  font-weight: 500;
+  margin-inline-start: auto;
+}
+
+.reaction-icon {
+  transition: background-color 0.3s ease;
+}
+
+.reply-icon:hover {
+  background-color:	#E1EEF6;
+}
+
+.reply-icon:hover svg path {
+  fill: #1D9BF0;
+  stroke: #1D9BF0;
+}
+
+.rt-icon:hover {
+  background-color:	#DEF1EB;
+}
+
+.rt-icon:hover svg path {
+  fill: #00BA7C;
+  stroke: #00BA7C;
+}
+
+.like-icon:hover {
+  background-color:	#F7E0EB;
+}
+
+.like-icon:hover svg path {
+  fill: #F91880;
+  stroke: #F91880;
+}
+
+.bookmark-icon:hover {
+  background-color:	#f7e4cb;
+}
+
+.bookmark-icon:hover svg path {
+  fill: #f7b154;
+  stroke: #f7b154;
+}
