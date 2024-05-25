@@ -12,6 +12,7 @@ ja:
       comment: コメント
       interaction: インタラクション
       bookmark: ブックマーク
+      message: メッセージ
     attributes:
       user:
         display_name: 表示名
@@ -28,3 +29,5 @@ ja:
         content: コメント
       interaction:
         type: タイプ
+      message:
+        content: 文字

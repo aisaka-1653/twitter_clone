@@ -3,3 +3,4 @@ ja:
     tweet:
       follow: "%{user}さんをフォロー"
       unfollow: "%{user}さんのフォローを解除"
+      send: "%{user}さんにメッセージを送る"
