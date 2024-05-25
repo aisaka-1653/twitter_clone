@@ -12,6 +12,8 @@
 @import './users/profile';
 @import './users/edit_profile';
 @import './tweets/tweet_detail';
+@import './rooms/room';
+@import './rooms/message';
 
 html, body {
   min-height: 100dvh;
