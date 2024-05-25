@@ -23,6 +23,7 @@ class User < ApplicationRecord
 
   has_many :room_users, dependent: :destroy
   has_many :messages, dependent: :destroy
+  has_many :rooms, through: :room_users
 
   has_one_attached :avatar
   has_one_attached :header
@@ -38,6 +39,10 @@ class User < ApplicationRecord
 
   def following?(user)
     following_users.include?(user)
+  end
+
+  def room_with(user)
+    rooms.joins(:users).where(users: { id: user.id }).take
   end
 
   def self.from_omniauth(auth)
