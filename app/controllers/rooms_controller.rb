@@ -9,6 +9,7 @@ class RoomsController < ApplicationController
 
   def show
     @user = @room.interlocutor(current_user)
+    @messages = @room.messages.includes(:user)
     @message = @room.messages.new
   end
 
@@ -26,10 +27,10 @@ class RoomsController < ApplicationController
   private
 
   def set_room
-    @room = Room.find(params[:id])
+    @room = Room.includes(:room_users, :users, :messages).find(params[:id])
   end
 
   def set_rooms
-    @rooms = current_user.rooms.includes(:users)
+    @rooms = current_user.rooms.includes(:room_users, :users, :messages, users: :avatar_attachment)
   end
 end

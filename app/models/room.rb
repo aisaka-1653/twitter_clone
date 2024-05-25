@@ -4,7 +4,7 @@ class Room < ApplicationRecord
   has_many :users, through: :room_users
 
   def interlocutor(current_user)
-    users.where.not(id: current_user.id).take
+    @interlocutor ||= users.where.not(id: current_user.id).take
   end
 
   def last_message

@@ -8,5 +8,5 @@
         span.text-secondary
           = "@#{room.interlocutor(current_user).username}"
       span.preview.d-inline-block.text-truncate.text-secondary
-        - if room.messages.exists?
+        - if room.messages.any?
           = room.last_message.content

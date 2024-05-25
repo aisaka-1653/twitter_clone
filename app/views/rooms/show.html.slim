@@ -21,7 +21,7 @@
         p.text-break
           = @user.bio
         hr
-      = render partial: 'message', collection: @room.messages
+      = render partial: 'message', collection: @messages
     = form_with model: @message, url: room_messages_path(@room) do |f|
       .d-flex.flex-row.message-form
         = f.text_area :content, class: "message-input form-control-plaintext w-100", placeholder: "新しいメッセージを作成" ,rows: 2
