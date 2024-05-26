@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MessagesController < ApplicationController
   include AuthorizeUserRoomAccess
   before_action :set_room, only: %i[create]

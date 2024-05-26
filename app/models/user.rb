@@ -42,7 +42,7 @@ class User < ApplicationRecord
   end
 
   def room_with(user)
-    rooms.joins(:users).where(users: { id: user.id }).take
+    rooms.joins(:users).find_by(users: { id: user.id })
   end
 
   def self.from_omniauth(auth)

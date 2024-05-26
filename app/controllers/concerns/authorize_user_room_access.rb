@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AuthorizeUserRoomAccess
   extend ActiveSupport::Concern
 
@@ -6,7 +8,7 @@ module AuthorizeUserRoomAccess
   def authorize_user_room_access!
     return if @room.users.exists?(current_user.id)
 
-    flash[:alert] = "アクセス権限がありません"
+    flash[:alert] = 'アクセス権限がありません'
     redirect_to rooms_url
   end
 end

@@ -56,16 +56,16 @@ user.header.attach(
 ApplicationRecord.transaction do
   User.where.not(id: user.id).find_each do |other_user|
     room = Room.create
-    room.room_users.create(user: user)
+    room.room_users.create(user:)
     room.room_users.create(user: other_user)
     2.times do
-      user.messages.create(room: room, content: "こんにちは!フォローありがとうございます!")
-      other_user.messages.create(room: room, content: "こんにちは!こちらこそフォローありがとうございます!")
-      user.messages.create(room: room, content: "あなたは何をされている方ですか?")
-      other_user.messages.create(room: room, content: "私はHappinessChainでプログラミング学習をしています")
-      other_user.messages.create(room: room, content: "現在はRailsの勉強中です")
-      user.messages.create(room: room, content: "そうだったんですね!引き続き頑張ってください!")
-      other_user.messages.create(room: room, content: "ありがとうございます!")
+      user.messages.create(room:, content: 'こんにちは!フォローありがとうございます!')
+      other_user.messages.create(room:, content: 'こんにちは!こちらこそフォローありがとうございます!')
+      user.messages.create(room:, content: 'あなたは何をされている方ですか?')
+      other_user.messages.create(room:, content: '私はHappinessChainでプログラミング学習をしています')
+      other_user.messages.create(room:, content: '現在はRailsの勉強中です')
+      user.messages.create(room:, content: 'そうだったんですね!引き続き頑張ってください!')
+      other_user.messages.create(room:, content: 'ありがとうございます!')
     end
   end
 end

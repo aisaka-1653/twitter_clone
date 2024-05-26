@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 class RoomsController < ApplicationController
   include AuthorizeUserRoomAccess
   before_action :set_room, only: %i[show]
   before_action :set_rooms, only: %i[index show]
   before_action :authorize_user_room_access!, only: %i[show]
 
-  def index
-  end
+  def index; end
 
   def show
     @user = @room.interlocutor(current_user)
