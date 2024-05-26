@@ -10,6 +10,6 @@ class Room < ApplicationRecord
   end
 
   def last_message
-    messages.order(created_at: :desc).last
+    messages.order(created_at: :desc).first
   end
 end
