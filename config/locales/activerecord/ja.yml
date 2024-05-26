@@ -11,6 +11,7 @@ ja:
       tweet: ツイート
       comment: コメント
       interaction: インタラクション
+      bookmark: ブックマーク
     attributes:
       user:
         display_name: 表示名
