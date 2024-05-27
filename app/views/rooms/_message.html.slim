@@ -1,0 +1,9 @@
+- if message.content.present?
+  - unless message.user == current_user
+    .d-flex.jutify-content-start
+      .message.interlocutor-message.text-break
+        = message.content
+  - else
+    .d-flex.justify-content-end
+      .message.self-message.text-break
+        = message.content

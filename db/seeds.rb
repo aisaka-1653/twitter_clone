@@ -16,7 +16,7 @@ ApplicationRecord.transaction do
     )
     user.skip_confirmation!
     user.save!
-    (1..10).each do |i|
+    (1..3).each do |i|
       user.tweets.create!(
         content: "#{user.display_name}です｡#{i}回目のツイートです｡"
       )
@@ -28,7 +28,7 @@ ApplicationRecord.transaction do
   User.find_each do |user|
     User.where.not(id: user.id).find_each do |other_user|
       Follow.create!(follower: user, followee: other_user)
-      other_user.tweets.limit(5).find_each do |tweet|
+      other_user.tweets.limit(2).find_each do |tweet|
         user.likes.create!(tweet:)
         user.retweets.create!(tweet:)
         user.bookmarks.create!(tweet:)
@@ -52,3 +52,22 @@ user.header.attach(
   filename: 'user1_header.png',
   content_type: 'image/png'
 )
+
+ApplicationRecord.transaction do
+  User.where.not(id: user.id).find_each do |other_user|
+    room = Room.create
+    room.room_users.create(user:)
+    room.room_users.create(user: other_user)
+    2.times do
+      user.messages.create(room:, content: 'こんにちは!フォローありがとうございます!')
+      other_user.messages.create(room:, content: 'こんにちは!こちらこそフォローありがとうございます!')
+      user.messages.create(room:, content: 'あなたは何をされている方ですか?')
+      other_user.messages.create(room:, content: '私はHappinessChainでプログラミング学習をしています')
+      other_user.messages.create(room:, content: '現在はRailsの勉強中です')
+      user.messages.create(room:, content: 'そうだったんですね!引き続き頑張ってください!')
+      other_user.messages.create(room:, content: 'ありがとうございます!')
+    end
+  end
+end
+
+Room.create

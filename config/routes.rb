@@ -21,6 +21,9 @@ Rails.application.routes.draw do
     resources :bookmarks, only: %i[create destroy]
   end
   resources :bookmarks, only: %i[index]
+  resources :rooms, only: %i[index create show] do
+    resources :messages, only: %i[create]
+  end
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   resources :tasks
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

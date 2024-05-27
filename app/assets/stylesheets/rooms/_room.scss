@@ -1,0 +1,39 @@
+.message-room {
+  display: grid;
+  grid-template-columns: 1fr 600px;
+  grid-template-rows: 1fr;
+  height: calc(100vh - 71px);
+}
+
+.users {
+  min-width: 430px;
+}
+
+.preview {
+  max-width: 340px;
+}
+
+.cta {
+  max-width: 400px;
+  margin-inline: auto;
+}
+
+.room {
+  display: flex;
+  flex-direction: column;
+  padding-inline: 16px;
+  height: 100%;
+  width: 600px;
+}
+
+@media (width < 1018px) {
+  .messages.message-room, .rooms.message-room {
+    grid-template-columns: 600px;
+  }
+  .messages > .users, .rooms > .room {
+    display: none;
+  }
+  .rooms .preview {
+    max-width: 520px;
+  }
+}

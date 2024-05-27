@@ -1,0 +1,12 @@
+= link_to room_path(room), class: "text-decoration-none text-dark" do
+  .d-flex.flex-row.align-items-start.p-3.gap-2.link
+    = image_tag room.interlocutor(current_user).avatar, size: "40x40", class: "avatar-image rounded-circle m-0"
+    .d-flex.flex-column
+      .d-flex.flex-row.gap-1
+        span.fw-semibold
+          = room.interlocutor(current_user).display_name
+        span.text-secondary
+          = "@#{room.interlocutor(current_user).username}"
+      span.preview.d-inline-block.text-truncate.text-secondary
+        - if room.messages.any?
+          = room.last_message.content

@@ -1,0 +1,11 @@
+.message-room.d-flex.flex-row.rooms
+  .users.border.border-top-0.overflow-auto
+    h2.fw-bold.fs-5.m-0.px-3.py-2
+      = Message.model_name.human
+    = render @rooms
+  .room.border.border-top-0.justify-content-center
+    .cta.d-flex.flex-column
+      span.fw-bold.fs-3.m-0.px-3.py-2
+        | メッセージを選択
+      span.text-secondary.fs-6.m-0.px-3.py-2
+        | 既存の会話から選択したり、新しい会話を開始したりできます。
