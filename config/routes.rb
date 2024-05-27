@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :rooms, only: %i[index create show] do
     resources :messages, only: %i[create]
   end
+  resources :notifications, only: %i[index]
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   resources :tasks
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
