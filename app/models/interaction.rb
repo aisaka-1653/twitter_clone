@@ -5,6 +5,7 @@ class Interaction < ApplicationRecord
 
   belongs_to :tweet
   belongs_to :user
+  has_one :notification, as: :notifiable, dependent: :destroy
 
   validates :type, inclusion: { in: %w[Like Retweet Bookmark] }
 

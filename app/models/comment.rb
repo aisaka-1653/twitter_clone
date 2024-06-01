@@ -5,6 +5,7 @@ class Comment < ApplicationRecord
 
   belongs_to :tweet, optional: true
   belongs_to :user
+  has_one :notification, as: :notifiable, dependent: :destroy
 
   scope :sorted, -> { order(created_at: :desc) }
 
