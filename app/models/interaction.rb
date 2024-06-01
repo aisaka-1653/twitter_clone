@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Interaction < ApplicationRecord
-  after_create_commit :create_interaction_notification
+  include Notifiable
 
   belongs_to :tweet
   belongs_to :user
@@ -11,13 +11,15 @@ class Interaction < ApplicationRecord
 
   private
 
-  def create_interaction_notification
-    return if user_id == tweet.user.id || type == 'Bookmark'
+  def notification_not_required?
+    user == tweet.user || type == 'Bookmark'
+  end
 
-    Notification.create(
-      sender_id: user_id,
-      recipient: tweet.user,
-      notifiable: self
-    )
+  def notification_sender
+    user
+  end
+
+  def notification_recipient
+    tweet.user
   end
 end

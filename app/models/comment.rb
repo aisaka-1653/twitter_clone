@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Comment < ApplicationRecord
-  after_create_commit :create_comment_notification
+  include Notifiable
 
   belongs_to :tweet, optional: true
   belongs_to :user
@@ -14,13 +14,15 @@ class Comment < ApplicationRecord
 
   private
 
-  def create_comment_notification
-    return if user_id == tweet.user.id
+  def notification_not_required?
+    user == tweet.user
+  end
 
-    Notification.create(
-      sender_id: user_id,
-      recipient: tweet.user,
-      notifiable: self
-    )
+  def notification_sender
+    user
+  end
+
+  def notification_recipient
+    tweet.user
   end
 end
