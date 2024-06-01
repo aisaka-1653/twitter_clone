@@ -26,3 +26,14 @@
   font-weight: 700;
   margin-bottom: 0;
 }
+
+.notification-count {
+  display: grid;
+  place-content: center;
+  background-color: #53A3E3;
+  font-size: 11px;
+  min-width: 16px;
+  height: 16px;
+  top: -5px;
+  right: -3px;
+}
