@@ -13,6 +13,7 @@ ja:
       interaction: インタラクション
       bookmark: ブックマーク
       message: メッセージ
+      notification: 通知
     attributes:
       user:
         display_name: 表示名

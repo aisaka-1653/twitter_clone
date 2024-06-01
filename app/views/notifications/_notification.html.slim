@@ -1,0 +1,11 @@
+= custom_link(notification) do
+  .d-flex.flex-row.align-items-start.link.border-top.px-3.py-2.gap-2(class="#{'unread' if notification.unread?}")
+    = custom_icon(notification)
+    .d-flex.flex-column.gap-3
+      = image_tag notification.sender.avatar, size: "40x40", class: "avatar-image rounded-circle m-0"
+      p.mb-0
+        span.fw-bold
+          = notification.sender.display_name
+        = notification_message(notification)
+      .text-secondary
+        = custom_content(notification)
