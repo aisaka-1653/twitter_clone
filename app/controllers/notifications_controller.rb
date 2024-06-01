@@ -13,6 +13,6 @@ class NotificationsController < ApplicationController
   private
 
   def update_unread_notifications_to_read
-    @notifications.unread.find_each { |notification| notification.update(checked: true) }
+    @notifications.unread.update_all(checked: true)
   end
 end

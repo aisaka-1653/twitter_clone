@@ -24,3 +24,7 @@ Layout/LineLength:
 Hc/RailsSpecificActionName:
   Exclude:
     - app/controllers/users/omniauth_callbacks_controller.rb
+Rails/SkipsModelValidations:
+  Exclude:
+    # Notificaitonモデルにvalidatationを設定していないので使用する
+    - 'app/controllers/notifications_controller.rb'
