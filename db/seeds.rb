@@ -28,15 +28,6 @@ ApplicationRecord.transaction do
   User.find_each do |user|
     User.where.not(id: user.id).find_each do |other_user|
       Follow.create!(follower: user, followee: other_user)
-      other_user.tweets.limit(2).find_each do |tweet|
-        user.likes.create!(tweet:)
-        user.retweets.create!(tweet:)
-        user.bookmarks.create!(tweet:)
-        user.comments.create!(
-          tweet:,
-          content: "#{other_user.display_name}さん!はじめまして!"
-        )
-      end
     end
   end
 end
