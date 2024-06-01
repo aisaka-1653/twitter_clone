@@ -21,6 +21,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_unread_notifications
-    @unread_notifications = current_user.received_notifications.unread 
+    @unread_notifications = current_user.received_notifications.unread
   end
 end

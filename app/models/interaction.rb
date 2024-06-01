@@ -13,6 +13,7 @@ class Interaction < ApplicationRecord
 
   def create_interaction_notification
     return if user_id == tweet.user.id || type == 'Bookmark'
+
     Notification.create(
       sender_id: user_id,
       recipient: tweet.user,

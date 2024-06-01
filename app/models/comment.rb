@@ -16,6 +16,7 @@ class Comment < ApplicationRecord
 
   def create_comment_notification
     return if user_id == tweet.user.id
+
     Notification.create(
       sender_id: user_id,
       recipient: tweet.user,
