@@ -25,6 +25,12 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :rooms, through: :room_users
 
+  has_many :sent_notifications, class_name: 'Notification', foreign_key: 'sender_id', dependent: :destroy,
+                                inverse_of: :sender
+  has_many :received_notifications, class_name: 'Notification', foreign_key: 'recipient_id', dependent: :destroy,
+                                    inverse_of: :recipient
+  has_many :notifications, as: :notifiable, dependent: :destroy
+
   has_one_attached :avatar
   has_one_attached :header
 

@@ -20,6 +20,11 @@ Layout/LineLength:
   Exclude:
     - config/initializers/devise.rb
     - db/migrate/*.rb
+    - app/helpers/notifications_helper.rb
 Hc/RailsSpecificActionName:
   Exclude:
     - app/controllers/users/omniauth_callbacks_controller.rb
+Rails/SkipsModelValidations:
+  Exclude:
+    # Notificaitonモデルにvalidatationを設定していないので使用する
+    - 'app/controllers/notifications_controller.rb'

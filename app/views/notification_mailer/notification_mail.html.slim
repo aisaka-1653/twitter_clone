@@ -1,0 +1,6 @@
+.d-flex.flex-row.align-items-start.px-3.py-2
+    = image_tag @notification.sender.avatar, size: "40x40", class: "avatar-image rounded-circle m-0"
+    p
+      span.fw-bold
+        = @notification.sender.display_name
+      = notification_message(@notification)
