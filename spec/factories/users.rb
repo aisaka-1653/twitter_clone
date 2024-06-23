@@ -20,5 +20,9 @@ FactoryBot.define do
     trait :google do
       provider { 'google' }
     end
+
+    trait :invalid do
+      email { nil }
+    end
   end
 end
