@@ -20,22 +20,25 @@ RSpec.describe User, type: :model do
     end
 
     describe 'uidの一意性' do
-      context '同じproviderの場合' do
-        let!(:existing_user) { create(:user, :github, uid: 'test_uid') }
+      let!(:existing_user) { create(:user, provider: 'github', uid: 'test_uid') }
 
+      context '同じproviderの場合' do
         it 'uidが異なれば有効な状態であること' do
-          expect(build(:user, :github, uid: 'diff_uid')).to be_valid
+          user = build(:user, provider: 'github', uid: 'diff_uid')
+          expect(user).to be_valid
         end
 
         it 'uidが重複したら無効な状態であること' do
-          expect(build(:user, :github, uid: 'test_uid')).not_to be_valid
+          user = build(:user, provider: 'github', uid: 'test_uid')
+          user.valid?
+          expect(user.errors[:uid]).to include('はすでに存在します')
         end
       end
 
       context '異なるproviderの場合' do
         it 'uidが重複しても有効な状態であること' do
-          create(:user, :github, uid: 'test_uid') 
-          expect(build(:user, :google, uid: 'test_uid')).to be_valid
+          user = build(:user, provider: 'google', uid: 'test_uid')
+          expect(user).to be_valid
         end
       end
     end
@@ -46,8 +49,13 @@ RSpec.describe User, type: :model do
     end
 
     context 'emailが重複する場合' do
-      let!(:existing_user) { create(:user) }
-      it { is_expected.to validate_uniqueness_of(:email).ignoring_case_sensitivity }
+      let!(:existing_user) { create(:user, email: 'test@example.com') }
+
+      it '無効な状態であること' do
+        user = build(:user, email: 'test@example.com')
+        user.valid?
+        expect(user.errors[:email]).to include('はすでに存在します')
+      end
     end
   end
 end

@@ -13,14 +13,6 @@ FactoryBot.define do
     uid { Faker::Internet.uuid }
     confirmed_at { Date.today }
 
-    trait :github do
-      provider { 'github' }
-    end
-
-    trait :google do
-      provider { 'google' }
-    end
-
     trait :invalid do
       email { nil }
     end
