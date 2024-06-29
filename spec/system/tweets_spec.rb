@@ -1,36 +1,37 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Tweets", type: :system do
-  describe 'ツイート' do
+RSpec.describe 'Tweets', type: :system do
+  describe 'Tweet' do
     let(:user) { create(:user) }
 
-    before { sign_in user }
+    before do
+      sign_in user
+      visit root_path
+    end
 
-    context '有効なパラメータの場合' do
-      it 'ツイートが投稿されホーム画面にリダイレクトすること' do
-        visit root_path
-
-        expect {
+    context 'with valid parameters' do
+      it 'creates a new tweet and displays it on the home page' do
+        expect do
           fill_in 'tweet_content', with: 'テストツイート'
           click_button 'ツイートする'
-        }.to change(Tweet, :count).by(1)
+        end.to change(Tweet, :count).by(1)
 
-        expect(current_path).to eq root_path
+        expect(page).to have_current_path root_path, ignore_query: true
         expect(page).to have_content user.username
         expect(page).to have_content 'テストツイート'
       end
     end
 
-    context '無効なパラメータの場合' do
-      it 'ホーム画面にリダイレクトしてflashメッセージを表示すること' do
-        visit root_path
-
-        expect {
+    context 'with invalid parameters' do
+      it 'does not create a tweet and displays an error message' do
+        expect do
           fill_in 'tweet_content', with: ''
           click_button 'ツイートする'
-        }.not_to change(Tweet, :count)
+        end.not_to change(Tweet, :count)
 
-        expect(current_path).to eq root_path
+        expect(page).to have_current_path root_path, ignore_query: true
         expect(page).to have_content '文字か画像のどちらかは入力必須です'
       end
     end

@@ -1,14 +1,17 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Users::Registrations", type: :system do
-  describe 'ユーザー登録' do
-    context '有効なパラメータの場合' do
-      it 'ユーザー登録ができ認証メールが届くこと' do
-        visit root_path
+RSpec.describe 'Users::Registrations', type: :system do
+  describe 'User registration' do
+    before { visit root_path }
+
+    context 'with valid parameters' do
+      it 'registers a new user and sends a confirmation email' do
         first('a', text: 'アカウント登録').click
-    
+
         perform_enqueued_jobs do
-          expect {
+          expect do
             fill_in 'Eメール', with: 'test@exapmle.com'
             fill_in 'パスワード', with: 'test123'
             fill_in 'パスワード（確認用）', with: 'test123'
@@ -17,13 +20,13 @@ RSpec.describe "Users::Registrations", type: :system do
             fill_in '生年月日', with: '1997-11-27'
             fill_in '電話番号', with: '00011112222'
             click_button 'アカウント登録'
-          }.to change(User, :count).by(1)
-    
-          expect(current_path).to eq new_user_session_path
+          end.to change(User, :count).by(1)
+
+          expect(page).to have_current_path new_user_session_path, ignore_query: true
         end
-    
+
         mail = ActionMailer::Base.deliveries.last
-    
+
         aggregate_failures do
           expect(mail.to).to eq ['test@exapmle.com']
           expect(mail.from).to eq ['please-change-me-at-config-initializers-devise@example.com']
@@ -34,12 +37,11 @@ RSpec.describe "Users::Registrations", type: :system do
       end
     end
 
-    context '無効なパラメータの場合' do
-      it 'ユーザー登録に失敗してバリデーションメッセージを表示すること' do
-        visit root_path
+    context 'with invalid parameters' do
+      it 'fails to register and displays validation messages' do
         first('a', text: 'アカウント登録').click
-  
-        expect {
+
+        expect do
           fill_in 'Eメール', with: ''
           fill_in 'パスワード', with: ''
           fill_in 'パスワード（確認用）', with: ''
@@ -48,8 +50,8 @@ RSpec.describe "Users::Registrations", type: :system do
           fill_in '生年月日', with: ''
           fill_in '電話番号', with: ''
           click_button 'アカウント登録'
-        }.to change(User, :count).by(0)
-        .and change { ActionMailer::Base.deliveries.count }.by(0)
+        end.to change(User, :count).by(0)
+                                   .and change { ActionMailer::Base.deliveries.count }.by(0)
 
         aggregate_failures do
           expect(page).to have_content 'Eメールを入力してください'

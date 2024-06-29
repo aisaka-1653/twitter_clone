@@ -28,3 +28,7 @@ Rails/SkipsModelValidations:
   Exclude:
     # Notificaitonモデルにvalidatationを設定していないので使用する
     - 'app/controllers/notifications_controller.rb'
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/ExampleLength:
+  Enabled: false

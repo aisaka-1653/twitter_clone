@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :user do
     email { Faker::Internet.email }
@@ -11,7 +13,7 @@ FactoryBot.define do
     location { Faker::Address.state }
     website { 'https://www.google.co.jp' }
     uid { Faker::Internet.uuid }
-    confirmed_at { Date.today }
+    confirmed_at { Time.zone.today }
 
     trait :invalid do
       email { nil }
