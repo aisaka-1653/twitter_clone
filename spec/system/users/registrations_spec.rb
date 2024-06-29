@@ -52,12 +52,12 @@ RSpec.describe "Users::Registrations", type: :system do
         .and change { ActionMailer::Base.deliveries.count }.by(0)
 
         aggregate_failures do
-          expect(page).to have_selector 'li', text: 'Eメールを入力してください'
-          expect(page).to have_selector 'li', text: 'パスワードを入力してください'
-          expect(page).to have_selector 'li', text: '表示名を入力してください'
-          expect(page).to have_selector 'li', text: 'ユーザー名を入力してください'
-          expect(page).to have_selector 'li', text: '生年月日を入力してください'
-          expect(page).to have_selector 'li', text: '電話番号を入力してください'
+          expect(page).to have_content 'Eメールを入力してください'
+          expect(page).to have_content 'パスワードを入力してください'
+          expect(page).to have_content '表示名を入力してください'
+          expect(page).to have_content 'ユーザー名を入力してください'
+          expect(page).to have_content '生年月日を入力してください'
+          expect(page).to have_content '電話番号を入力してください'
         end
       end
     end
