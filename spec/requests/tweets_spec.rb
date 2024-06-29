@@ -6,15 +6,16 @@ RSpec.describe 'Tweets', type: :request do
   describe 'POST /tweets' do
     context 'ログインユーザの場合' do
       let(:user) { create(:user) }
+
       before { sign_in user }
 
       context '有効なパラメータの場合' do
-        let(:params) { { tweet: attributes_for(:tweet) } }
+        let(:params) { { tweet: attributes_for(:tweet, content: 'Twitterを始めました!') } }
 
         it 'ツイートしてホーム画面にリダイレクトすること' do
-          expect do
+          expect {
             post tweets_path, params: params
-          end.to change(Tweet, :count).by(1)
+          }.to change(Tweet, :count).by(1)
 
           expect(response).to have_http_status :found
           expect(response).to redirect_to root_path
@@ -24,12 +25,12 @@ RSpec.describe 'Tweets', type: :request do
       end
 
       context '無効なパラメータの場合' do
-        let(:params) { { tweet: attributes_for(:tweet, :invalid) } }
+        let(:params) { { tweet: attributes_for(:tweet, content: nil) } }
 
         it 'ホーム画面にリダイレクトしてflashメッセージを表示すること' do
           expect do
             post tweets_path, params: params
-          end.not_to change(Tweet, :count)
+          end.to_not change(Tweet, :count)
 
           expect(response).to have_http_status :found
           expect(response).to redirect_to root_path
@@ -55,9 +56,9 @@ RSpec.describe 'Tweets', type: :request do
 
   describe 'GET /tweets/:id' do
     context 'ログインユーザの場合' do
-      let(:user) { create(:user) }
       let(:tweet) { create(:tweet) }
-      before { sign_in user }
+
+      before { sign_in tweet.user }
 
       it 'ツイート詳細画面を表示すること' do
         get tweet_path(tweet)
